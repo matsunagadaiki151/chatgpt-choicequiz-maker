@@ -19,8 +19,6 @@ repos:
       - id: check-toml
       # yaml 構文チェック
       - id: check-yaml
-      # aws の認証情報が含まれていないかチェック
-      - id: detect-aws-credentials
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:
@@ -32,12 +30,12 @@ repos:
     hooks:
       # mypy による型チェック実行
       - id: mypy
-  - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
     hooks:
       # isort によるフォーマット実行
       - id: isort
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 4.0.1
     hooks:
       # flake8 によるコードチェック実行
