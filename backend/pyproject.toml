@@ -3,7 +3,10 @@ name = "backend"
 version = "0.1.0"
 description = ""
 authors = ["matsunagadaiki151 <38464576+matsunagadaiki151@users.noreply.github.com>"]
-readme = "README.md"
+packages = [
+    { include = "schema", from = "src" },
+    { include = "routers", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -69,7 +72,6 @@ line_length = 79
 name = "python-template"
 version = "0.1.0"
 description = "Python Project の Template"
-readme = "README.md"
 
 [[project.authors]]
 name = "jDBTISK"
