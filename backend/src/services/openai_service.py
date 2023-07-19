@@ -39,5 +39,6 @@ def make_json(text: str):
     chain = LLMChain(llm=chat, prompt=prompt)
 
     output = chain.run(text)
+    quizzes = parser.parse(output)
 
-    return output
+    return quizzes
