@@ -3,12 +3,9 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 from langchain.output_parsers import PydanticOutputParser
 
-from backend.sandbox.langchain_test import Quizzes
+from schema.quizzes_schema import Quizzes
 
 chat = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, client=None)
-
-
-text_path: str = "./sandbox/documents/zenn_langchain.txt"
 
 
 def load_text(text_path: str):
@@ -17,7 +14,7 @@ def load_text(text_path: str):
         return f.read()
 
 
-def make_json(text: str):
+def create_quiz(text: str):
     template = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
 
     説明文: {document}
