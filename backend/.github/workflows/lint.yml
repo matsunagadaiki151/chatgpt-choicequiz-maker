@@ -1,0 +1,58 @@
+name: python lint
+
+on:
+  # main ブランチ向けのプルリク作成時、及び
+  # main ブランチ向けプルリクのソースブランチへの push 時に workflow 実行
+  pull_request:
+    branches:
+      - main
+    # python ファイル or 使用するライブラリ (poetry.lock) or このファイル
+    # に変更があったときだけ workflow 実行
+    paths:
+      - "src/**.py"
+      - "tests/**.py"
+      - "poetry.lock"
+      - ".github/workflows/lint.yml"
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      # ここで指定するバージョンを増やせば複数の python バージョンで各 step を実行出来ます
+      # ライブラリを作っていて対応している python バージョン全てで test を行いたいときに便利です
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+
+      # .venv ディレクトリをキャッシュ
+      - uses: actions/cache@v2
+        id: venv_cache
+        with:
+          path: .venv
+          key: venv-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+      # poetry.lock ファイルに変更がなければキャッシュされている .venv を使用
+      - name: Install Dependencies
+        if: steps.venv_cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Python Lint
+        run: poetry run task lint
+
+      - name: Python Test
+        run: poetry run task test

@@ -1,0 +1,53 @@
+repos:
+  # hooks script のソースリポジトリ
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    # リポジトリのブランチ or タグ
+    rev: v4.2.0
+    # 使用したい hook script の指定
+    hooks:
+      # markdown 以外の行末スペース削除
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      # ファイル最終行を改行コードにする
+      - id: end-of-file-fixer
+      # 改行コードを LF に統一
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      # 巨大なファイルの commit を禁止
+      - id: check-added-large-files
+      # toml 構文チェック
+      - id: check-toml
+      # yaml 構文チェック
+      - id: check-yaml
+      # aws の認証情報が含まれていないかチェック
+      - id: detect-aws-credentials
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      # black によるフォーマット実行
+      - id: black
+        language_version: python3
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.942
+    hooks:
+      # mypy による型チェック実行
+      - id: mypy
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      # isort によるフォーマット実行
+      - id: isort
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      # flake8 によるコードチェック実行
+      - id: flake8
+        # 使用する flake8 プラグイン
+        additional_dependencies:
+          - flake8-isort
+          - flake8-bugbear
+          - flake8-builtins
+          - flake8-eradicate
+          - flake8-pytest-style
+          - flake8-unused-arguments
+          - pep8-naming
