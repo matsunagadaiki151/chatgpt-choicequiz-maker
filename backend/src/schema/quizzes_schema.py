@@ -3,6 +3,10 @@ from typing import List
 from pydantic import BaseModel, Field
 
 
+class CreateHeader(BaseModel):
+    text: str = Field(description="input text")
+
+
 class Choice(BaseModel):
     choice_id: int = Field(description="choice_id")
     choice_sentence: str = Field(description="choice description")
