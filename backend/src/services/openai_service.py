@@ -16,6 +16,7 @@ def load_text(text_path: str):
 
 def create_quiz(text: str):
     template = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
+誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。
 
     説明文: {document}
 
