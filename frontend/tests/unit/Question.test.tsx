@@ -12,10 +12,10 @@ describe("Questionコンポーネント", () => {
 
   it("正しく問題文が表示される", () => {
     const { getByText } = render(<Question {...mockQuestion} />);
-    const questionIdElement = getByText("問題1");
-    const questionSentenceElement = getByText(mockQuestion.questionSentent);
+    const questionElement = getByText(
+      `問題${mockQuestion.questionId} : ${mockQuestion.questionSentent}`
+    );
 
-    expect(questionIdElement).toBeInTheDocument();
-    expect(questionSentenceElement).toBeInTheDocument();
+    expect(questionElement).toBeInTheDocument();
   });
 });
