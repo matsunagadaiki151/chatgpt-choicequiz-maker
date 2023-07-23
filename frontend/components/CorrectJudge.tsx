@@ -1,9 +1,9 @@
 import { TCorrectJugde } from "@/types/componentTypes";
-import React, { FC } from "react";
+import React from "react";
 
 const CorrectJudge = ({ isCorrect }: TCorrectJugde) => {
   return (
-    <div className="text-3xl font-marugo font-bold p-2 w-36 text-center">
+    <div className="text-3xl font-marugo font-bold p-2">
       {isCorrect ? (
         <p className="text-red-500">正解！</p>
       ) : (
