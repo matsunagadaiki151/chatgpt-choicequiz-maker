@@ -4,7 +4,7 @@ import { TButton } from "@/types/componentTypes";
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ bgColor, onButtonClick, children }: TButton) => {
+const Button = ({ bgColor, onButtonClick, children }: TButton) => {
   return (
     <button
       onClick={onButtonClick}
@@ -14,3 +14,5 @@ export const Button = ({ bgColor, onButtonClick, children }: TButton) => {
     </button>
   );
 };
+
+export default Button;
