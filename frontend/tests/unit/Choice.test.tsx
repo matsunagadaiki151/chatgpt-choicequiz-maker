@@ -8,8 +8,15 @@ import "@testing-library/jest-dom";
 const testOptions = ["Option A", "Option B", "Option C", "Option D"];
 
 test("選択肢が正しく表示される", () => {
+  const onOptionChangeMock = jest.fn();
   // Choiceコンポーネントをレンダリング
-  render(<Choice options={testOptions} />);
+  render(
+    <Choice
+      options={testOptions}
+      selectedOption={testOptions[0]}
+      onOptionChange={onOptionChangeMock}
+    />
+  );
 
   // ラジオボタンとラベルが正しく表示されていることを確認
   const radioButtons = screen.getAllByRole("radio");
@@ -25,13 +32,23 @@ test("選択肢が正しく表示される", () => {
   });
 });
 
-test("選択肢が正しく変更される", () => {
-  render(<Choice options={testOptions} />);
+test("onOptionChangeが呼び出されるか", () => {
+  const onOptionChangeMock = jest.fn();
+
+  render(
+    <Choice
+      options={testOptions}
+      selectedOption={testOptions[0]}
+      onOptionChange={onOptionChangeMock}
+    />
+  );
 
   const initialSelectedOption = screen.getByLabelText(testOptions[0]);
   expect(initialSelectedOption).toBeChecked();
 
   const newSelectedOption = testOptions[1];
   fireEvent.click(screen.getByLabelText(newSelectedOption));
-  expect(screen.getByLabelText(newSelectedOption)).toBeChecked();
+
+  expect(onOptionChangeMock).toHaveBeenCalledTimes(1);
+  expect(onOptionChangeMock).toHaveBeenCalledWith(newSelectedOption);
 });
