@@ -1,5 +1,4 @@
 // Choice.test.js
-
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Choice from "@/components/Choice";
@@ -24,4 +23,15 @@ test("選択肢が正しく表示される", () => {
     expect(labels[index]).toBeInTheDocument();
     expect(labels[index]).toHaveTextContent(option);
   });
+});
+
+test("選択肢が正しく変更される", () => {
+  render(<Choice options={testOptions} />);
+
+  const initialSelectedOption = screen.getByLabelText(testOptions[0]);
+  expect(initialSelectedOption).toBeChecked();
+
+  const newSelectedOption = testOptions[1];
+  fireEvent.click(screen.getByLabelText(newSelectedOption));
+  expect(screen.getByLabelText(newSelectedOption)).toBeChecked();
 });

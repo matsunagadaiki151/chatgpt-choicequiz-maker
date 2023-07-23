@@ -2,7 +2,7 @@ import { TChoice } from "@/types/componentTypes";
 import React, { useState } from "react";
 
 const Choice = ({ options }: TChoice) => {
-  const [selectedOption, setSelectedOption] = useState("これ");
+  const [selectedOption, setSelectedOption] = useState(options[0]);
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
   };
