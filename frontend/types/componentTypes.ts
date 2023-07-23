@@ -16,3 +16,7 @@ export type TButton = {
   onButtonClick: () => void;
   children: ReactNode;
 };
+
+export type TCorrectJugde = {
+  isCorrect: boolean;
+};
