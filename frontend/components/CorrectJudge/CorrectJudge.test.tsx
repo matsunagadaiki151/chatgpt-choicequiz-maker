@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import CorrectJudge from "@/components/CorrectJudge";
+import CorrectJudge from "@/components/CorrectJudge/CorrectJudge";
 
 describe("ラベルが正しく表示される", () => {
   test("「正解！」が正しく表示される", () => {

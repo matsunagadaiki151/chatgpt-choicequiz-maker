@@ -1,7 +1,7 @@
 // Question.test.tsx
 import React from "react";
 import { render } from "@testing-library/react";
-import Question from "@/components/Question";
+import Question from "@/components/Question/Question";
 import "@testing-library/jest-dom";
 
 describe("Questionコンポーネント", () => {

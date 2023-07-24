@@ -1,31 +1,22 @@
-import { TQuizLayout } from "@/types/layoutTypes";
-import Button from "../components/Button";
-import Choice from "../components/Choice";
-import CorrectJudge from "../components/CorrectJudge";
-import Question from "../components/Question";
-import React, { createContext, useEffect, useState } from "react";
+import Button from "../../../components/Button/Button";
+import Choice from "../../../components/Choice/Choice";
+import CorrectJudge from "../../../components/CorrectJudge/CorrectJudge";
+import Question from "../../../components/Question/Question";
+import React, { useState } from "react";
+import { judgeCorrect } from "../api/judgeCorrect";
+import { TQuizLayout } from "../types/QuizType";
 
 const QuizLayout = ({ quiz }: TQuizLayout) => {
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
-  const [quizId, setQuizId] = useState(1);
-  const [quizSentent, setQuizSentent] = useState("");
+
+  // useState
   const [selectedOption, setSelectedOption] = useState(choiceSentents[0]);
-  const judgeCorrect = (choiceSentents: string, quiz: TQuizLayout["quiz"]) => {
-    const matchedChoice = quiz.choice.find(
-      (c) => c.choice_sentence == choiceSentents
-    );
-
-    if (!matchedChoice) {
-      throw new Error("対象の文章から選択肢Idを取得できませんでした。");
-    }
-
-    return matchedChoice.choice_id === quiz.answer_id;
-  };
+  const [display, setDisplay] = useState(false);
   const [isCorrect, setIsCorrect] = useState(
     judgeCorrect(choiceSentents[0], quiz)
   );
 
-  const [display, setDisplay] = useState(false);
+  // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
     setIsCorrect(judgeCorrect(option, quiz));

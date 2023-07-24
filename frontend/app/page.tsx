@@ -1,6 +1,6 @@
 "use client";
 
-import QuizLayout from "@/layouts/QuizLayout";
+import QuizLayout from "@/features/quiz/components/Quiz";
 
 const sampleQuiz = {
   quiz_id: 1,

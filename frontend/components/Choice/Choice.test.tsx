@@ -1,7 +1,7 @@
 // Choice.test.js
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Choice from "@/components/Choice";
+import Choice from "@/components/Choice/Choice";
 import "@testing-library/jest-dom";
 
 // テスト用のオプションデータ
