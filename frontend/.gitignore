@@ -43,3 +43,6 @@ stories
 
 ## package
 package-lock.json
+
+## json-server
+mock
