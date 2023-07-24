@@ -40,3 +40,6 @@ layouts/**/*.stories.*
 features/**/Quiz.stories.tsx
 stories
 .storybook
+
+## package
+package-lock.json
