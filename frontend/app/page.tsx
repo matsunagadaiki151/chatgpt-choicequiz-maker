@@ -1,37 +1,13 @@
-"use client";
-
+import { getMockQuiz } from "@/features/quiz/api/getQuiz";
 import QuizLayout from "@/features/quiz/components/Quiz";
+import Link from "next/link";
 
-const sampleQuiz = {
-  quiz_id: 1,
-  question: "LangChainは何のためのライブラリですか？",
-  choice: [
-    {
-      choice_id: 1,
-      choice_sentence: "大規模言語モデルを使ったサービス開発に役立つ",
-    },
-    {
-      choice_id: 2,
-      choice_sentence: "データベースを操作するためのモジュール",
-    },
-    {
-      choice_id: 3,
-      choice_sentence: "画像処理を行うためのライブラリ",
-    },
-    {
-      choice_id: 4,
-      choice_sentence: "音声認識を行うためのモジュール",
-    },
-  ],
-  answer_id: 1,
-};
-
-export default function Home() {
+export default async function Home() {
   return (
-    <main>
-      <div className="text-center">
-        <QuizLayout quiz={sampleQuiz} />
-      </div>
-    </main>
+    <Link
+      href={"/quiz/1"}
+    >
+      <div className="text-giray font-marugo text-center hover:text-blue-300 hover:cursor-pointer">クイズを解く</div>
+    </Link>
   );
 }
