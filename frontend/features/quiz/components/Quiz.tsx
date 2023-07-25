@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "../../../components/Button/Button";
 import Choice from "../../../components/Choice/Choice";
 import CorrectJudge from "../../../components/CorrectJudge/CorrectJudge";
