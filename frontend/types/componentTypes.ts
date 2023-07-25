@@ -20,3 +20,12 @@ export type TButton = {
 export type TCorrectJugde = {
   isCorrect: boolean;
 } & ComponentProps<"div">;
+
+export type THeader = {
+  title: string;
+};
+
+export type TFooter = {
+  author: string;
+  createYear: number;
+};
