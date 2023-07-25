@@ -3,11 +3,13 @@ export type TChoiceContent = {
   choice_sentence: string;
 };
 
+export type TQuiz = {
+  quiz_id: number;
+  question: string;
+  choice: TChoiceContent[];
+  answer_id: number;
+};
+
 export type TQuizLayout = {
-  quiz: {
-    quiz_id: number;
-    question: string;
-    choice: TChoiceContent[];
-    answer_id: number;
-  };
+  quiz: TQuiz;
 };
