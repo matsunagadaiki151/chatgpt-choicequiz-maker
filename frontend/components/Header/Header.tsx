@@ -7,12 +7,10 @@ import Link from "next/link";
  */
 const Header = ({ title }: THeader) => {
   return (
-    <header>
-      <div className="w-full bg-giray text-center items-center p-4">
-        <Link href={"/"}>
-          <div className="font-marugo text-white text-3xl m-auto">{title}</div>
-        </Link>
-      </div>
+    <header className="w-full bg-giray text-center items-center p-4 mb-10">
+      <Link href={"/"}>
+        <div className="font-marugo text-white text-3xl m-auto">{title}</div>
+      </Link>
     </header>
   );
 };

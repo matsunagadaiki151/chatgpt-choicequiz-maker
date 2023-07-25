@@ -7,7 +7,7 @@ import Link from "next/link";
  */
 const Footer = ({ author, createYear }: TFooter) => {
   return (
-    <footer className="w-full bg-giray text-center items-center pt-6 pb-2 fixed bottom-0 left-0">
+    <footer className="w-full bg-giray text-center items-center pt-6 pb-2 fixed bottom-0 left-0 mt-10">
       <div className="font-marugo text-white text-xs">
         {`${author} @${createYear}`}
       </div>
