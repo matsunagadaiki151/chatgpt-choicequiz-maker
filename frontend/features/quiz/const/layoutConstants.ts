@@ -1,3 +1,3 @@
 export const siteTitle = "AI Mondai Maker";
-export const author = "giratro";
+export const author = "giranaga";
 export const createYear = 2023;
