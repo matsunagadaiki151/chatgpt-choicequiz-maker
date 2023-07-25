@@ -1,6 +1,5 @@
 import React from "react";
 import { TFooter } from "@/types/componentTypes";
-import Link from "next/link";
 
 /**
  * Primary UI component for user interaction
