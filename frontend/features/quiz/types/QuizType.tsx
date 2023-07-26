@@ -10,6 +10,6 @@ export type TQuiz = {
   answer_id: number;
 };
 
-export type TQuizLayout = {
+export type TQuizProps = {
   quiz: TQuiz;
 };

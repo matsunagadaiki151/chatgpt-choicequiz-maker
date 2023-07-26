@@ -6,9 +6,9 @@ import CorrectJudge from "../../../components/CorrectJudge/CorrectJudge";
 import Question from "../../../components/Question/Question";
 import React, { useState } from "react";
 import { judgeCorrect } from "../api/judgeCorrect";
-import { TQuizLayout } from "../types/QuizType";
+import { TQuizProps } from "../types/QuizType";
 
-const QuizLayout = ({ quiz }: TQuizLayout) => {
+const QuizLayout = ({ quiz }: TQuizProps) => {
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
 
   // useState
