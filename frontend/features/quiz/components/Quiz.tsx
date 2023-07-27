@@ -7,8 +7,12 @@ import Question from "../../../components/Question/Question";
 import React, { useState } from "react";
 import { judgeCorrect } from "../api/judgeCorrect";
 import { TQuizProps } from "../types/QuizType";
+import { quizListState } from "../states/quizListState";
+import { useRecoilValue } from "recoil";
 
-const QuizLayout = ({ quiz }: TQuizProps) => {
+const Quiz = ({ id }: TQuizProps) => {
+  const quizList = useRecoilValue(quizListState);
+  const quiz = quizList[id - 1];
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
 
   // useState
@@ -44,4 +48,4 @@ const QuizLayout = ({ quiz }: TQuizProps) => {
   );
 };
 
-export default QuizLayout;
+export default Quiz;

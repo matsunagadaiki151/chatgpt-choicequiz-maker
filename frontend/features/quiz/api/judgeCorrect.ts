@@ -1,9 +1,6 @@
-import { TQuizLayout } from "../types/QuizType";
+import { TQuiz } from "../types/QuizType";
 
-export const judgeCorrect = (
-  choiceSentents: string,
-  quiz: TQuizLayout["quiz"]
-) => {
+export const judgeCorrect = (choiceSentents: string, quiz: TQuiz) => {
   const matchedChoice = quiz.choice.find(
     (c) => c.choice_sentence == choiceSentents
   );

@@ -1,19 +1,18 @@
-import { getMockQuiz } from "@/features/quiz/api/getQuiz";
-import QuizLayout from "@/features/quiz/components/Quiz";
+import Quiz from "@/features/quiz/components/Quiz";
 import { TQuizPageParam } from "@/types/pageParam";
 import Link from "next/link";
 
 export default async function Page({ params }: TQuizPageParam) {
   const { id } = params;
-  const sampleQuizzes = await getMockQuiz();
+
   if (id >= 6) {
     return <div>Not Found</div>;
   }
-  const sampleQuiz = sampleQuizzes[id - 1];
+
   return (
     <main>
       <div className="text-center">
-        <QuizLayout quiz={sampleQuiz} />
+        <Quiz id={id} />
       </div>
       {id < 5 ? (
         <Link href={`/quiz/${Number(id) + 1}`}>

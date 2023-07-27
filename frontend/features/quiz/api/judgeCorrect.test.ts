@@ -1,8 +1,8 @@
 import { judgeCorrect } from "./judgeCorrect";
-import { TQuizLayout } from "../types/QuizType";
+import { TQuizProps } from "../types/QuizType";
 
 describe("judgeCorrect関数", () => {
-  const sampleQuiz: TQuizLayout["quiz"] = {
+  const sampleQuiz: TQuizProps["quiz"] = {
     quiz_id: 1,
     question: "フランスの首都はどこ?",
     choice: [

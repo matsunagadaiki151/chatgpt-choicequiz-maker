@@ -9,6 +9,8 @@ import {
   siteTitle,
 } from "@/features/quiz/const/layoutConstants";
 
+import AppProvider from "./provider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header title={siteTitle} />
-        {children}
+        <AppProvider>{children}</AppProvider>
         <Footer author={author} createYear={createYear} />
       </body>
     </html>

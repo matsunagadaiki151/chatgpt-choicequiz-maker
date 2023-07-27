@@ -11,5 +11,5 @@ export type TQuiz = {
 };
 
 export type TQuizProps = {
-  quiz: TQuiz;
+  id: number;
 };
