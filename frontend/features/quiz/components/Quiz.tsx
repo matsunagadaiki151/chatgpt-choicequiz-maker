@@ -4,28 +4,40 @@ import Button from "../../../components/Button/Button";
 import Choice from "../../../components/Choice/Choice";
 import CorrectJudge from "../../../components/CorrectJudge/CorrectJudge";
 import Question from "../../../components/Question/Question";
-import React, { useState } from "react";
-import { judgeCorrect } from "../api/judgeCorrect";
+import React, { useEffect, useState } from "react";
 import { TQuizProps } from "../types/QuizType";
 import { quizListState } from "../states/quizListState";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { quizIsCorrectState } from "../states/quizIsCorrectState";
+import { judgeCorrect } from "../api/judgeCorrect";
 
 const Quiz = ({ id }: TQuizProps) => {
+  const QUIZ_NUM = 5;
   const quizList = useRecoilValue(quizListState);
+  const [quizIsCorrects, setQuizIsCorrects] =
+    useRecoilState(quizIsCorrectState);
+
+  useEffect(() => {
+    if (quizIsCorrects.length !== QUIZ_NUM) {
+      setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
+    }
+  }, []);
+
   const quiz = quizList[id - 1];
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
 
   // useState
-  const [selectedOption, setSelectedOption] = useState(choiceSentents[0]);
+  const [selectedOption, setSelectedOption] = useState("");
   const [display, setDisplay] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(
-    judgeCorrect(choiceSentents[0], quiz)
-  );
-
+  console.log(quizIsCorrects);
   // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
-    setIsCorrect(judgeCorrect(option, quiz));
+    const isCorrect = judgeCorrect(option, quiz);
+    const nowIsCorrects = [...quizIsCorrects].map((nowIsCorrect, index) =>
+      id - 1 === index ? isCorrect : nowIsCorrect
+    );
+    setQuizIsCorrects(nowIsCorrects);
   };
 
   const onButtonClick = () => {
@@ -43,7 +55,7 @@ const Quiz = ({ id }: TQuizProps) => {
       <Button bgColor="blue" onButtonClick={onButtonClick} className="w-32">
         解答
       </Button>
-      {display && <CorrectJudge isCorrect={isCorrect} />}
+      {display && <CorrectJudge isCorrect={quizIsCorrects[id - 1]} />}
     </div>
   );
 };
