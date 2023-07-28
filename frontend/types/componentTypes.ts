@@ -17,6 +17,12 @@ export type TButton = {
   children: ReactNode;
 } & ComponentProps<"button">;
 
+export type TLinkButton = {
+  bgColor: "blue" | "orange" | "green";
+  href: string;
+  children: ReactNode;
+};
+
 export type TCorrectJugde = {
   isCorrect: boolean;
 } & ComponentProps<"div">;
