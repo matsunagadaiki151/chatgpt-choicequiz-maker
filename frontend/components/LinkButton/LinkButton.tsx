@@ -14,7 +14,7 @@ const LinkButton = ({ bgColor, href, children }: TLinkButton) => {
   return (
     <Link
       href={href}
-      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl py-2 px-6`}
+      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl py-4 px-6`}
     >
       {children}
     </Link>
