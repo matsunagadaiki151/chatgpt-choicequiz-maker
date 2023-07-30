@@ -25,9 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col w-screen h-screen`}>
         <Header title={siteTitle} />
-        <AppProvider>{children}</AppProvider>
+        <div className="flex-1">
+          <AppProvider>{children}</AppProvider>
+        </div>
         <Footer author={author} createYear={createYear} />
       </body>
     </html>

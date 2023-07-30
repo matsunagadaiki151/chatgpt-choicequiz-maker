@@ -45,7 +45,7 @@ const Quiz = ({ id }: TQuizProps) => {
   };
 
   return (
-    <div className="w-1/2 flex flex-col justify-center items-center m-auto space-y-8">
+    <div className="flex flex-col justify-center items-center space-y-8">
       <Question questionId={quiz.quiz_id} questionSentent={quiz.question} />
       <Choice
         options={choiceSentents}

@@ -1,32 +1,25 @@
+import LinkButton from "@/components/LinkButton/LinkButton";
 import Quiz from "@/features/quiz/components/Quiz";
+import QuizNav from "@/features/quiz/components/QuizNav/QuizNav";
 import { TQuizPageParam } from "@/types/pageParam";
 import Link from "next/link";
 
 export default async function Page({ params }: TQuizPageParam) {
   const { id } = params;
+  const MAX_QUIZ_NUM = 5;
 
   if (id >= 6) {
     return <div>Not Found</div>;
   }
 
   return (
-    <main>
-      <div className="text-center">
+    <div className="h-full flex flex-col justify-betweeen">
+      <div className="flex-1">
         <Quiz id={id} />
       </div>
-      {id < 5 ? (
-        <Link href={`/quiz/${Number(id) + 1}`}>
-          <div className="mt-20 text-right mr-24 font-marugo text-giray hover:text-blue-300">
-            次の問題へ→
-          </div>
-        </Link>
-      ) : (
-        <Link href="/result">
-          <div className="mt-20 text-right mr-24 font-marugo text-giray hover:text-blue-300">
-            問題を終了する
-          </div>
-        </Link>
-      )}
-    </main>
+      <div className="mx-24 mb-20">
+        <QuizNav quizId={id} maxQuizNum={5} />
+      </div>
+    </div>
   );
 }
