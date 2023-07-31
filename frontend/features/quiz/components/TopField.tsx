@@ -3,7 +3,6 @@
 import Button from "@/components/Button/Button";
 import { quizListState } from "@/features/quiz/states/quizListState";
 import { TQuiz } from "@/features/quiz/types/QuizType";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 
