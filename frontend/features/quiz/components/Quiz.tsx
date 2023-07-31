@@ -29,7 +29,6 @@ const Quiz = ({ id }: TQuizProps) => {
   // useState
   const [selectedOption, setSelectedOption] = useState("");
   const [display, setDisplay] = useState(false);
-  console.log(quizIsCorrects);
   // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
