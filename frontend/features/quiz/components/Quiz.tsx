@@ -1,8 +1,6 @@
 "use client";
 
-import Button from "../../../components/Button/Button";
 import Choice from "../../../components/Choice/Choice";
-import CorrectJudge from "../../../components/CorrectJudge/CorrectJudge";
 import Question from "../../../components/Question/Question";
 import React, { useEffect, useState } from "react";
 import { TQuizProps } from "../types/QuizType";
@@ -28,7 +26,6 @@ const Quiz = ({ id }: TQuizProps) => {
 
   // useState
   const [selectedOption, setSelectedOption] = useState("");
-  const [display, setDisplay] = useState(false);
   // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
@@ -39,10 +36,6 @@ const Quiz = ({ id }: TQuizProps) => {
     setQuizIsCorrects(nowIsCorrects);
   };
 
-  const onButtonClick = () => {
-    setDisplay(true);
-  };
-
   return (
     <div className="flex flex-col justify-center items-center space-y-8">
       <Question questionId={quiz.quiz_id} questionSentent={quiz.question} />
@@ -51,10 +44,6 @@ const Quiz = ({ id }: TQuizProps) => {
         selectedOption={selectedOption}
         onOptionChange={onOptionChange}
       />
-      <Button bgColor="blue" onButtonClick={onButtonClick} className="w-32">
-        解答
-      </Button>
-      {display && <CorrectJudge isCorrect={quizIsCorrects[id - 1]} />}
     </div>
   );
 };
