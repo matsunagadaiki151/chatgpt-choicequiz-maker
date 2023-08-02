@@ -7,6 +7,7 @@ import { TQuiz } from "@/features/quiz/types/QuizType";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { getMockQuiz } from "../api/getQuiz";
 
 type TQuizListProps = {
   quizzes: TQuiz[];
@@ -17,6 +18,7 @@ const TopField = ({ quizzes }: TQuizListProps) => {
   const [sentence, SetSentence] = useState("");
   const setQuizList = useSetRecoilState(quizListState);
   const topButtonClick = async () => {
+    const quizzes = await getMockQuiz();
     setQuizList(quizzes);
     router.push("/quiz/1");
   };
