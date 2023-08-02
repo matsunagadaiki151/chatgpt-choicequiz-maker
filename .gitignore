@@ -178,3 +178,5 @@ pyrightconfig.json
 sandbox/*
 
 sample_quiz.json
+
+features/quiz/hooks/timer.ts
