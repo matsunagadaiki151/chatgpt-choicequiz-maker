@@ -5,10 +5,10 @@ from services.openai_service import create_quiz
 
 router = APIRouter()
 
-text_path: str = "./sandbox/documents/zenn_langchain.txt"
-
 
 @router.post("/create/")
 def read_item(create_header: CreateHeader):
-    quizzes = create_quiz(create_header.text)
+    text = create_header.text
+    text.replace("¥n", "")
+    quizzes = create_quiz(text)
     return quizzes
