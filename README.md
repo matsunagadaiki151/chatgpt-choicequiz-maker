@@ -25,6 +25,8 @@ LLMの技術を利用してクイズを作成します。
   - React Testing Library
 - 状態管理
     - Recoil
+- LLM
+  - OpenAI (gpt-3.5-turbo)
 
 ### バックエンド
 - 言語
