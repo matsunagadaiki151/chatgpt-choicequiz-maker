@@ -32,7 +32,6 @@ def create_quiz(text: str):
             "format_instructions": parser.get_format_instructions()
         },
     )
-    print(parser.get_format_instructions)
 
     chain = LLMChain(llm=chat, prompt=prompt)
 
