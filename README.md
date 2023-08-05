@@ -14,7 +14,7 @@ LLMの技術を利用してクイズを作成します。
 
 ### フロントエンド
 - 言語
-    - Next.js
+    - TypeScript
 - フレームワーク
     - Next.js
 - UI
