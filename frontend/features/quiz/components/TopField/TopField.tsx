@@ -2,12 +2,10 @@
 
 import Button from "@/components/Button/Button";
 import SentenceField from "@/components/SententceField/SentenceField";
-import { quizListState } from "@/features/quiz/states/quizListState";
 import { TQuiz } from "@/features/quiz/types/QuizType";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { useSetRecoilState } from "recoil";
-import { getMockQuiz } from "../api/getQuiz";
+import TopLoading from "../TopLoading/TopLoading";
 
 type TQuizListProps = {
   quizzes: TQuiz[];
@@ -15,12 +13,10 @@ type TQuizListProps = {
 
 const TopField = ({ quizzes }: TQuizListProps) => {
   const router = useRouter();
-  const [sentence, SetSentence] = useState("");
-  const setQuizList = useSetRecoilState(quizListState);
+  const [sentence, SetSentence] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const topButtonClick = async () => {
-    const quizzes = await getMockQuiz();
-    setQuizList(quizzes);
-    router.push("/quiz/1");
+    setIsLoading(true);
   };
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,6 +36,7 @@ const TopField = ({ quizzes }: TQuizListProps) => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
+        {isLoading && <TopLoading />}
       </div>
     </>
   );

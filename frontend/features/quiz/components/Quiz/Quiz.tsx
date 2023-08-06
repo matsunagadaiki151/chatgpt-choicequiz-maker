@@ -1,13 +1,13 @@
 "use client";
 
-import Choice from "../../../components/Choice/Choice";
-import Question from "../../../components/Question/Question";
 import React, { useEffect, useState } from "react";
-import { TQuizProps } from "../types/QuizType";
-import { quizListState } from "../states/quizListState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { quizIsCorrectState } from "../states/quizIsCorrectState";
-import { judgeCorrect } from "../api/judgeCorrect";
+import { TQuizProps } from "../../types/QuizType";
+import { quizListState } from "../../states/quizListState";
+import { quizIsCorrectState } from "../../states/quizIsCorrectState";
+import { judgeCorrect } from "../../api/judgeCorrect";
+import Question from "@/components/Question/Question";
+import Choice from "@/components/Choice/Choice";
 
 const Quiz = ({ id }: TQuizProps) => {
   const QUIZ_NUM = 5;
