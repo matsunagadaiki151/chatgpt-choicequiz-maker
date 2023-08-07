@@ -8,7 +8,7 @@ const testHref = "";
 
 test("ボタン風リンクが正しく表示される", () => {
   render(
-    <LinkButton bgColor={testBgColor} href={testHref}>
+    <LinkButton bgColor={testBgColor} size="medium" href={testHref}>
       {testLabel}
     </LinkButton>
   );

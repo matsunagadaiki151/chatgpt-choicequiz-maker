@@ -19,6 +19,7 @@ export type TButton = {
 
 export type TLinkButton = {
   bgColor: "blue" | "orange" | "green";
+  size: "small" | "medium" | "large";
   href: string;
   children: ReactNode;
 };

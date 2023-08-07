@@ -5,16 +5,28 @@ import Link from "next/link";
 /**
  * Primary UI component for user interaction
  */
-const LinkButton = ({ bgColor, href, children }: TLinkButton) => {
+
+const LinkButton = ({
+  bgColor,
+  href,
+  size = "medium",
+  children,
+}: TLinkButton) => {
   const bgColorVariants = {
     blue: "bg-blue-500",
     orange: "bg-orange-500",
     green: "bg-green-500",
   };
+
+  const sizeVariants = {
+    small: "py-2 px-4",
+    medium: "py-4 px-6",
+    large: "py-6 px-8",
+  };
   return (
     <Link
       href={href}
-      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl py-4 px-6`}
+      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl ${sizeVariants[size]}`}
     >
       {children}
     </Link>

@@ -1,4 +1,3 @@
-import LinkButton from "@/components/LinkButton/LinkButton";
 import Quiz from "@/features/quiz/components/Quiz/Quiz";
 import QuizNav from "@/features/quiz/components/QuizNav/QuizNav";
 import { TQuizPageParam } from "@/types/pageParam";

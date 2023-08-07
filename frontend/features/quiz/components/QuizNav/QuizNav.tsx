@@ -18,17 +18,25 @@ function QuizNav({ quizId, maxQuizNum, isDebug = false }: TQuizNav) {
   return (
     <div className="font-marugo text-white flex justify-between">
       <div className={visiblePreviosLink} role="previuos">
-        <LinkButton bgColor="blue" href={`/quiz/${Number(quizId) - 1}`}>
+        <LinkButton
+          bgColor="blue"
+          size="medium"
+          href={`/quiz/${Number(quizId) - 1}`}
+        >
           ← 前の問題へ
         </LinkButton>
       </div>
       <div className={visibleFinishLink} role="finish">
-        <LinkButton href="/result" bgColor="orange">
+        <LinkButton href="/result" size="medium" bgColor="orange">
           問題を終了する
         </LinkButton>
       </div>
       <div className={visibleNextLink} role="next">
-        <LinkButton bgColor="blue" href={`/quiz/${Number(quizId) + 1}`}>
+        <LinkButton
+          bgColor="blue"
+          size="medium"
+          href={`/quiz/${Number(quizId) + 1}`}
+        >
           次の問題へ →
         </LinkButton>
       </div>

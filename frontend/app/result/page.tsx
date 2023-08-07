@@ -8,7 +8,7 @@ export default async function Page() {
         <Result />
       </div>
       <div className="mb-20">
-        <LinkButton bgColor="blue" href="/">
+        <LinkButton bgColor="blue" size="medium" href="/">
           トップへ戻る
         </LinkButton>
       </div>
