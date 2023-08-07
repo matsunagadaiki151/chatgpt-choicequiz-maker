@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { TQuizProps } from "../../types/QuizType";
 import { quizListState } from "../../states/quizListState";
@@ -10,16 +10,9 @@ import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 
 const Quiz = ({ id }: TQuizProps) => {
-  const QUIZ_NUM = 5;
   const quizList = useRecoilValue(quizListState);
   const [quizIsCorrects, setQuizIsCorrects] =
     useRecoilState(quizIsCorrectState);
-
-  useEffect(() => {
-    if (quizIsCorrects.length !== QUIZ_NUM) {
-      setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
-    }
-  }, []);
 
   const quiz = quizList[id - 1];
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
