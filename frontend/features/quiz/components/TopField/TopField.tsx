@@ -2,16 +2,12 @@
 
 import Button from "@/components/Button/Button";
 import SentenceField from "@/components/SententceField/SentenceField";
-import { TQuiz } from "@/features/quiz/types/QuizType";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Suspense, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
+import Loading from "@/components/Loading/Loading";
 
-type TQuizListProps = {
-  quizzes: TQuiz[];
-};
-
-const TopField = ({ quizzes }: TQuizListProps) => {
+const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +32,11 @@ const TopField = ({ quizzes }: TQuizListProps) => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        {isLoading && <TopLoading />}
+        {isLoading && (
+          <Suspense fallback={<Loading />}>
+            <TopLoading />
+          </Suspense>
+        )}
       </div>
     </>
   );
