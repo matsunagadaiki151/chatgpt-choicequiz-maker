@@ -27,12 +27,12 @@ const TopLoading = () => {
   return (
     <>
       {isLoading || (
-        <>
+        <div className="flex flex-col justify-between items-center space-y-4">
           <div>クイズの作成が完了しました！！</div>
-          <LinkButton bgColor={"blue"} href="/quiz/1">
+          <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
             クイズを開始する
           </LinkButton>
-        </>
+        </div>
       )}
     </>
   );
