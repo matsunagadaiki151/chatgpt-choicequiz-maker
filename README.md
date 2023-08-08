@@ -25,8 +25,7 @@ LLMの技術を利用してクイズを作成します。
   - React Testing Library
 - 状態管理
     - Recoil
-- LLM
-  - OpenAI (gpt-3.5-turbo)
+    - SWR
 
 ### バックエンド
 - 言語
@@ -40,9 +39,11 @@ LLMの技術を利用してクイズを作成します。
     - Black
     - mypy
     - isort
+- LLM
+  - OpenAI (gpt-3.5-turbo)
 
 ### インフラ
-- 未定(Dockerは使う予定)
+- Docker
 
  
 
