@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, Suspense, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
+import { SENTENCE_LENGTH } from "../../const/layoutConstants";
 
 const TopField = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const TopField = () => {
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     SetSentence(e.target.value);
+    setIsLoading(false);
   };
 
   return (
@@ -32,10 +34,14 @@ const TopField = () => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        {isLoading && (
-          <Suspense fallback={<Loading />}>
-            <TopLoading sentence={sentence} />
-          </Suspense>
+        {sentence.length > SENTENCE_LENGTH ? (
+          <div className="text-red-500">文章は3000文字以内にしてください。</div>
+        ) : (
+          isLoading && (
+            <Suspense fallback={<Loading />}>
+              <TopLoading sentence={sentence} />
+            </Suspense>
+          )
         )}
       </div>
     </>
