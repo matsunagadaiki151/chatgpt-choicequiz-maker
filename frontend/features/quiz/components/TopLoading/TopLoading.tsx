@@ -1,18 +1,19 @@
 "use client";
 
 import useSWR from "swr";
-import { getMockQuiz } from "../../api/getQuiz";
+import { getQuizFromSentence } from "../../api/getQuiz";
 import { useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { useEffect } from "react";
+import { TLoading } from "../../types/QuizType";
 
-const TopLoading = () => {
+const TopLoading = ({ sentence }: TLoading) => {
   const QUIZ_NUM = 5;
   const { data, error, isLoading } = useSWR(
-    "http://localhost:8001/Items",
-    getMockQuiz,
+    ["http://localhost:8000/create", sentence],
+    ([url, sentence]) => getQuizFromSentence(url, sentence),
     { suspense: true }
   );
 

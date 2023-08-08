@@ -13,3 +13,7 @@ export type TQuiz = {
 export type TQuizProps = {
   id: number;
 };
+
+export type TLoading = {
+  sentence: string;
+};

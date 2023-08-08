@@ -34,7 +34,7 @@ const TopField = () => {
         </Button>
         {isLoading && (
           <Suspense fallback={<Loading />}>
-            <TopLoading />
+            <TopLoading sentence={sentence} />
           </Suspense>
         )}
       </div>
