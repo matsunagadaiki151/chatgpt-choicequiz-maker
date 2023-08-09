@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - HOSTNAME=localhost
+    command: ["node", "server.js"]
+    tty: true
+
+volumes:
+  node_modules:
