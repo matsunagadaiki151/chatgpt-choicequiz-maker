@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3002:3002"
