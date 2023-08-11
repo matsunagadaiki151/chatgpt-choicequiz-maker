@@ -1,0 +1,10 @@
+.venv
+*/__pycache__
+sandbox
+.mypy_cache
+.github
+.chroma
+.gitignore
+.dockerignore
+.pre-commit-config.yaml
+.python-version

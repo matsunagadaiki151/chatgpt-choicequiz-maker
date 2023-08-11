@@ -1,18 +1,20 @@
-FROM python:latest
+# ベースイメージを指定
+FROM python:3.11
 
-ARG work_dir="/src/"
+# ワーキングディレクトリを設定
+WORKDIR /app
 
-# コンテナにアクセスした際のデフォルトディレクトリ
-WORKDIR ${work_dir}
+# Poetryのインストール
+RUN pip install poetry
+RUN poetry config virtualenvs.create false
 
-# poetryのインストール先の指定
-ENV POETRY_HOME=/opt/poetry
-# poetryインストール
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    # シンボリックによるpathへのpoetryコマンドの追加
-    cd /usr/local/bin && \
-    ln -s /opt/poetry/bin/poetry && \
-    # 仮想環境を作成しない設定(コンテナ前提のため，仮想環境を作らない)
-    poetry config virtualenvs.create false && \
-    poetry new . && \
-    poetry add fastapi uvicorn
+# プロジェクトの依存ライブラリをインストール
+COPY pyproject.toml .
+COPY poetry.lock .
+
+# ソースコードをコピー
+COPY . .
+
+RUN poetry install --no-interaction --no-ansi
+
+CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
