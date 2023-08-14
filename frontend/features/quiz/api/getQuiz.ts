@@ -2,6 +2,7 @@ import axios from "axios";
 import { TQuiz } from "../types/QuizType";
 import { sleep } from "../hooks/timer";
 import { TResponse } from "@/types/pageParam";
+import { convertNewLine } from "../hooks/quizUtil";
 
 // export const getMockQuiz = async (url: string) => {
 //   const res = await axios.get<TQuiz[]>(url);
@@ -13,8 +14,9 @@ import { TResponse } from "@/types/pageParam";
 // };
 
 export const getQuizFromSentence = async (url: string, sentence: string) => {
+  const convertedSentence = convertNewLine(sentence);
   const headData = {
-    text: sentence,
+    text: convertedSentence,
   };
 
   const res = await axios.post<TResponse>(url, headData);

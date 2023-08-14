@@ -10,3 +10,7 @@ export const initializeQuizAnswers = (quizList: TQuiz[]) => {
     };
   });
 };
+
+export const convertNewLine = (text: string) => {
+  return text.replace(/\n/g, "<br>");
+};
