@@ -2,7 +2,7 @@
 name = "backend"
 version = "0.1.0"
 description = ""
-authors = ["matsunagadaiki151 <38464576+matsunagadaiki151@users.noreply.github.com>"]
+authors = ["matsunagadaiki151"]
 packages = [
     { include = "schema", from = "src" },
     { include = "routers", from = "src" },

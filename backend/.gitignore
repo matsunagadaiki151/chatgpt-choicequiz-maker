@@ -179,3 +179,5 @@ sandbox/*
 
 .chroma/index
 .vscode
+
+.gitignore
