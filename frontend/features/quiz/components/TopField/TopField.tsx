@@ -34,14 +34,20 @@ const TopField = () => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        {sentence.length > SENTENCE_LENGTH ? (
-          <div className="text-red-500">文章は3000文字以内にしてください。</div>
-        ) : (
-          isLoading && (
-            <Suspense fallback={<Loading />}>
-              <TopLoading sentence={sentence} />
-            </Suspense>
-          )
+        {sentence.length > SENTENCE_LENGTH && (
+          <div className="text-yellow-500 text-center">
+            <div className="font-bold text-center text-xl mb-2">Warning</div>
+            <div>
+              文章が3000文字以上だと精度が悪化することがあります
+              <br />
+              また、クイズの作成に時間がかかります
+            </div>
+          </div>
+        )}
+        {isLoading && (
+          <Suspense fallback={<Loading />}>
+            <TopLoading sentence={sentence} />
+          </Suspense>
         )}
       </div>
     </>
