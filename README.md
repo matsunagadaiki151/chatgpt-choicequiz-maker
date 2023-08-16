@@ -13,6 +13,8 @@
 
 ### (推奨) Dockerによる構築
 
+**(注意) 自身のAPIキーを用いる方法なので料金は各自で発生します。**
+
 **要件**
 - OpenAIのAPIキーを取得済みである。
 - Dockerおよびdocker composeが使用可能である。
@@ -76,6 +78,10 @@ docker compose -f "docker-compose.yml" up -d --build
 
 ### インフラ
 - Docker
+
+
+## License
+
 
  
 
