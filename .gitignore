@@ -180,3 +180,4 @@ sandbox/*
 sample_quiz.json
 
 features/quiz/hooks/timer.ts
+.DS_Store

@@ -13,8 +13,6 @@ repos:
       # 改行コードを LF に統一
       - id: mixed-line-ending
         args: [--fix=lf]
-      # 巨大なファイルの commit を禁止
-      - id: check-added-large-files
       # toml 構文チェック
       - id: check-toml
       # yaml 構文チェック

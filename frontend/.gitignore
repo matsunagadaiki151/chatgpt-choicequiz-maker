@@ -41,8 +41,5 @@ features/**/*.stories.tsx
 stories
 .storybook
 
-## package
-package-lock.json
-
 ## json-server
 mock
