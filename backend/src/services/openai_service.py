@@ -46,7 +46,7 @@ def create_quiz_normal(text: str):
 
 def create_quiz_map_reduce(text: str):
     # テキストの分割を行う。
-    text_splitter = CharacterTextSplitter()
+    text_splitter = CharacterTextSplitter(separator="<br>", chunk_size=3000)
     texts = text_splitter.split_text(text)
     docs = [Document(page_content=t) for t in texts]
 
@@ -67,6 +67,7 @@ def create_quiz_map_reduce(text: str):
         chain_type="map_reduce",
         map_prompt=map_prompt,
         combine_prompt=map_prompt,
+        verbose=True,
     )
     template = """以下の説明文から4択クイズを5つ作成し特定のフォーマットで出力してください。
     クイズは必ず日本語で作成してください。
@@ -93,12 +94,11 @@ def create_quiz_map_reduce(text: str):
     output = overall_chain_map_reduce.run(docs)
 
     quizzes = parser.parse(output)
-
     return quizzes
 
 
 def create_quiz(text: str):
-    if len(text) < 3500:
+    if len(text) < 3000:
         return create_quiz_normal(text)
     else:
         return create_quiz_map_reduce(text)
