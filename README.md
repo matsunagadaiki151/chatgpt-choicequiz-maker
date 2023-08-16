@@ -7,7 +7,40 @@
 
 ## 機能
 - 入力された文章から4択クイズを作成する(5問作成が可能)
-- (TODO)作成されたクイズをそのまま解くことができる。
+- 作成されたクイズをそのまま解くことができる。
+
+## Usage
+
+### (推奨) Dockerによる構築
+
+**要件**
+- OpenAIのAPIキーを取得済みである。
+- Dockerおよびdocker composeが使用可能である。
+- 3GB程度の容量
+
+**手順**
+1. 本リポジトリをcloneする。
+```
+git clone https://github.com/matsunagadaiki151/chatgpt-choicequiz-maker.git
+cd chatgpt-choicequiz-maker
+```
+
+2. `backend`直下の`.env.sample`を`.env`に変更し、中身を編集する。
+```
+# 自身のAPI_KEYを設定する。
+OPENAI_API_KEY={YOUR_OPENAI_API_KEY}
+```
+
+3. 以下コマンドを実行し、dockerを立ち上げる。
+```
+docker compose -f "docker-compose.yml" up -d --build
+```
+
+4.  http://localhost:3002 にアクセスする。
+
+終わったら`docker compose -f "docker-compose.yml" down`で dockerを落とし、`docker system prune`で不要なイメージを削除しておきましょう。
+
+
 
 ## 技術スタック
 
