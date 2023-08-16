@@ -67,7 +67,6 @@ def create_quiz_map_reduce(text: str):
         chain_type="map_reduce",
         map_prompt=map_prompt,
         combine_prompt=map_prompt,
-        verbose=True,
     )
     template = """以下の説明文から4択クイズを5つ作成し特定のフォーマットで出力してください。
     クイズは必ず日本語で作成してください。
