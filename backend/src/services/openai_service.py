@@ -1,7 +1,8 @@
-from services.GPTService import GPT35Turbo4kService
+from services.GPTService import GPT35Turbo4kService, GPT35Turbo16kService
 
 model2service = {
     "gpt-3.5-turbo": GPT35Turbo4kService,
+    "gpt-3.5-turbo-16k": GPT35Turbo16kService,
 }
 
 
