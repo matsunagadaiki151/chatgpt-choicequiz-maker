@@ -2,18 +2,20 @@
 
 import useSWR from "swr";
 import { getQuizFromSentence } from "../../api/getQuiz";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { useEffect } from "react";
 import { TLoading } from "../../types/QuizType";
+import { modelNameState } from "../../states/modelNameState";
 
 const TopLoading = ({ sentence }: TLoading) => {
+  const modelName = useRecoilValue(modelNameState);
   const QUIZ_NUM = 5;
   const { data, error, isLoading } = useSWR(
     ["http://localhost:8000/create", sentence],
-    ([url, sentence]) => getQuizFromSentence(url, sentence),
+    ([url, sentence]) => getQuizFromSentence(url, sentence, modelName),
     { suspense: true }
   );
 

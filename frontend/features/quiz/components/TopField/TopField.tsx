@@ -7,11 +7,14 @@ import { ChangeEvent, Suspense, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { SENTENCE_LENGTH } from "../../const/layoutConstants";
+import { TModelName } from "../../types/QuizType";
+import { useRecoilState } from "recoil";
 
 const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const topButtonClick = async () => {
     setIsLoading(true);
   };
