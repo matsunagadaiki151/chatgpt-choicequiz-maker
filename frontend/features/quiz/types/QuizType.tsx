@@ -18,4 +18,4 @@ export type TLoading = {
   sentence: string;
 };
 
-export type TModelName = "gpt-3.5-turbo";
+export type TModelName = "gpt-3.5-turbo" | "gpt-3.5-turbo-16k";

@@ -2,7 +2,7 @@ import { TRadioTab } from "@/types/componentTypes";
 
 const RadioTab = ({ options, selectedOption, onOptionChange }: TRadioTab) => {
   return (
-    <div className="w-full flex text-giray justify-center items-center font-marugo">
+    <div className="w-2/3 flex text-giray justify-center items-center font-marugo">
       {options.map((option) => (
         <label key={option} className="w-full">
           <input
