@@ -4,6 +4,7 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.docstore.document import Document
 from langchain.output_parsers import PydanticOutputParser
+from langchain.schema import OutputParserException
 from langchain.text_splitter import CharacterTextSplitter
 
 from schema.quizzes_schema import Quizzes
@@ -16,6 +17,7 @@ class GPT35Turbo4kService:
         )
 
         self.recommend_length = 3000
+        self.parser = PydanticOutputParser(pydantic_object=Quizzes)
 
         self.text = text
 
@@ -28,22 +30,18 @@ class GPT35Turbo4kService:
         {format_instructions}
         """
 
-        parser = PydanticOutputParser(pydantic_object=Quizzes)
-
         prompt = PromptTemplate(
             template=template,
             input_variables=["document"],
             partial_variables={
-                "format_instructions": parser.get_format_instructions()
+                "format_instructions": self.parser.get_format_instructions()
             },
         )
 
         chain = LLMChain(llm=self.llm, prompt=prompt)
 
         output = chain.run(self.text)
-        quizzes = parser.parse(output)
-
-        return quizzes
+        return output
 
     def create_quiz_map_reduce(self):
         # テキストの分割を行う。
@@ -80,13 +78,11 @@ class GPT35Turbo4kService:
         {format_instructions}
         """
 
-        parser = PydanticOutputParser(pydantic_object=Quizzes)
-
         prompt_subject = PromptTemplate(
             template=template,
             input_variables=["document"],
             partial_variables={
-                "format_instructions": parser.get_format_instructions()
+                "format_instructions": self.parser.get_format_instructions()
             },
         )
         chain_subject = LLMChain(llm=self.llm, prompt=prompt_subject)
@@ -95,14 +91,23 @@ class GPT35Turbo4kService:
         )
         output = overall_chain_map_reduce.run(docs)
 
-        quizzes = parser.parse(output)
-        return quizzes
+        return output
+
+    def parse_output(self, output: str):
+        try:
+            quizzes = self.parser.parse(output)
+            if len(quizzes.Items) != 5:
+                raise ValueError
+            return quizzes
+        except (OutputParserException, ValueError):
+            raise ValueError("Invalida data structure")
 
     def create_quiz(self):
         if len(self.text) < self.recommend_length:
-            return self.create_quiz_normal()
+            output = self.create_quiz_normal()
         else:
-            return self.create_quiz_map_reduce()
+            output = self.create_quiz_map_reduce()
+        return self.parse_output(output)
 
 
 class GPT35Turbo16kService:
@@ -112,6 +117,7 @@ class GPT35Turbo16kService:
         )
 
         self.recommend_length = 12000
+        self.parser = PydanticOutputParser(pydantic_object=Quizzes)
 
         self.text = text
 
@@ -124,22 +130,18 @@ class GPT35Turbo16kService:
         {format_instructions}
         """
 
-        parser = PydanticOutputParser(pydantic_object=Quizzes)
-
         prompt = PromptTemplate(
             template=template,
             input_variables=["document"],
             partial_variables={
-                "format_instructions": parser.get_format_instructions()
+                "format_instructions": self.parser.get_format_instructions()
             },
         )
 
         chain = LLMChain(llm=self.llm, prompt=prompt)
 
         output = chain.run(self.text)
-        quizzes = parser.parse(output)
-
-        return quizzes
+        return output
 
     def create_quiz_map_reduce(self):
         # テキストの分割を行う。
@@ -176,13 +178,11 @@ class GPT35Turbo16kService:
         {format_instructions}
         """
 
-        parser = PydanticOutputParser(pydantic_object=Quizzes)
-
         prompt_subject = PromptTemplate(
             template=template,
             input_variables=["document"],
             partial_variables={
-                "format_instructions": parser.get_format_instructions()
+                "format_instructions": self.parser.get_format_instructions()
             },
         )
         chain_subject = LLMChain(llm=self.llm, prompt=prompt_subject)
@@ -191,11 +191,21 @@ class GPT35Turbo16kService:
         )
         output = overall_chain_map_reduce.run(docs)
 
-        quizzes = parser.parse(output)
-        return quizzes
+        return output
+
+    def parse_output(self, output: str):
+        try:
+            quizzes = self.parser.parse(output)
+            if len(quizzes.Items) != 5:
+                raise ValueError
+            return quizzes
+        except (OutputParserException, ValueError):
+            raise ValueError("Invalida data structure")
 
     def create_quiz(self):
         if len(self.text) < self.recommend_length:
-            return self.create_quiz_normal()
+            output = self.create_quiz_normal()
         else:
-            return self.create_quiz_map_reduce()
+            output = self.create_quiz_map_reduce()
+
+        return self.parse_output(output)

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { TResponse } from "@/types/pageParam";
 import { convertNewLine } from "../hooks/quizUtil";
 
@@ -13,7 +13,16 @@ export const getQuizFromSentence = async (
     model_name: modelName,
   };
 
-  const res = await axios.post<TResponse>(url, headData);
-
-  return res.data.Items;
+  try {
+    const res = await axios.post<TResponse>(url, headData);
+    return res.data.Items;
+  } catch (error) {
+    if (
+      axios.isAxiosError(error) &&
+      error.response &&
+      error.response.status === 502
+    ) {
+      throw Error("");
+    }
+  }
 };

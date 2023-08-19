@@ -6,30 +6,48 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TLoading } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 
 const TopLoading = ({ sentence }: TLoading) => {
+  const [is502Error, setIs502Error] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIs502Error(false);
+  }, []);
+
+  const fetcher = (url: string) => {
+    return getQuizFromSentence(url, sentence, modelName);
+  };
+
   const modelName = useRecoilValue(modelNameState);
   const QUIZ_NUM = 5;
   const { data, error, isLoading } = useSWR(
-    ["http://localhost:8000/create", sentence],
-    ([url, sentence]) => getQuizFromSentence(url, sentence, modelName),
+    "http://localhost:8000/create",
+    fetcher,
     { suspense: true }
   );
+
+  if (error) {
+    console.log("エラー発生");
+    setIs502Error(true);
+  }
 
   const setQuizzes = useSetRecoilState(quizListState);
   const setQuizIsCorrects = useSetRecoilState(quizIsCorrectState);
 
   useEffect(() => {
-    setQuizzes(data);
-    setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
+    console.log(is502Error);
+    if (data !== undefined) {
+      setQuizzes(data);
+      setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
+    }
   }, []);
 
   return (
     <>
-      {isLoading || (
+      {!isLoading && !is502Error && (
         <div className="flex flex-col justify-between items-center space-y-4">
           <div>クイズの作成が完了しました！！</div>
           <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>

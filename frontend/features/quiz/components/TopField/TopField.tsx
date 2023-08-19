@@ -12,6 +12,8 @@ import { modelNameState } from "../../states/modelNameState";
 import RadioTab from "@/components/RadioTab/RadioTab";
 import { TModelName } from "../../types/QuizType";
 import Warning from "../Warning/Warning";
+import { ErrorFallback } from "../TopLoading/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
 
 const TopField = () => {
   const router = useRouter();
@@ -63,12 +65,16 @@ const TopField = () => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        <Warning sentence={sentence} selectedModelName={modelName} />
-        {isLoading && (
-          <Suspense fallback={<Loading />}>
-            <TopLoading sentence={sentence} />
-          </Suspense>
-        )}
+        <div>
+          <Warning sentence={sentence} selectedModelName={modelName} />
+          {isLoading && (
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Suspense fallback={<Loading />}>
+                <TopLoading sentence={sentence} />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+        </div>
       </div>
     </>
   );
