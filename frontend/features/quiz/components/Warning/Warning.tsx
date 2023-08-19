@@ -6,9 +6,6 @@ const Warning = ({ sentence, selectedModelName }: TWarning) => {
     "gpt-3.5-turbo-16k": 12000,
   };
 
-  console.log(sentence);
-  console.log(selectedModelName);
-
   const sentenceLength = recommendLengths[selectedModelName];
   return (
     <div className="text-yellow-500 text-center">
