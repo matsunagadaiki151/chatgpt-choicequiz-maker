@@ -3,7 +3,7 @@
 import Button from "@/components/Button/Button";
 import SentenceField from "@/components/SententceField/SentenceField";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, Suspense, useState } from "react";
+import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { SENTENCE_LENGTH } from "../../const/layoutConstants";
@@ -25,6 +25,10 @@ const TopField = () => {
     "GPT3.5Turbo": "gpt-3.5-turbo",
     "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
   };
+
+  useEffect(() => {
+    setModelName("gpt-3.5-turbo");
+  }, []);
 
   const topButtonClick = async () => {
     setIsLoading(true);
