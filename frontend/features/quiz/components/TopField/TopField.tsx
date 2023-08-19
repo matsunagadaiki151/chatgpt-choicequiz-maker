@@ -11,13 +11,13 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { modelNameState } from "../../states/modelNameState";
 import RadioTab from "@/components/RadioTab/RadioTab";
 import { TModelName } from "../../types/QuizType";
+import Warning from "../Warning/Warning";
 
 const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
-  // const setModelName = useSetRecoilState(modelNameState);
   const [modelName, setModelName] = useRecoilState(modelNameState);
 
   const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
@@ -59,16 +59,7 @@ const TopField = () => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        {sentence.length > SENTENCE_LENGTH && (
-          <div className="text-yellow-500 text-center">
-            <div className="font-bold text-center text-xl mb-2">Warning</div>
-            <div>
-              文章が3000文字以上だと精度が悪化することがあります
-              <br />
-              また、クイズの作成に時間がかかります
-            </div>
-          </div>
-        )}
+        <Warning sentence={sentence} selectedModelName={modelName} />
         {isLoading && (
           <Suspense fallback={<Loading />}>
             <TopLoading sentence={sentence} />
