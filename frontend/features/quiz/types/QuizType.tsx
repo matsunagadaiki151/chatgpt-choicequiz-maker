@@ -17,3 +17,10 @@ export type TQuizProps = {
 export type TLoading = {
   sentence: string;
 };
+
+export type TModelName = "gpt-3.5-turbo" | "gpt-3.5-turbo-16k";
+
+export type TWarning = {
+  sentence: string;
+  selectedModelName: TModelName;
+};
