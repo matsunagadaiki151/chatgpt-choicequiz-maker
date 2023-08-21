@@ -19,6 +19,7 @@ const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCreated, setIsCreated] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
   const [modelName, setModelName] = useRecoilState(modelNameState);
 
@@ -67,10 +68,10 @@ const TopField = () => {
         </Button>
         <div>
           <Warning sentence={sentence} selectedModelName={modelName} />
-          {isLoading && (
+          {(isLoading || isCreated) && (
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <Suspense fallback={<Loading />}>
-                <TopLoading sentence={sentence} />
+                <TopLoading sentence={sentence} setIsCreated={setIsCreated} />
               </Suspense>
             </ErrorBoundary>
           )}

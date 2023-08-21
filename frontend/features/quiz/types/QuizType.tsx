@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type TChoiceContent = {
   choice_id: number;
   choice_sentence: string;
@@ -16,6 +18,7 @@ export type TQuizProps = {
 
 export type TLoading = {
   sentence: string;
+  setIsCreated: Dispatch<SetStateAction<boolean>>;
 };
 
 export type TModelName = "gpt-3.5-turbo" | "gpt-3.5-turbo-16k";

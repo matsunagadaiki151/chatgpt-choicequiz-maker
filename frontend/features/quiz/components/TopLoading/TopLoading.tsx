@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { TLoading } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 
-const TopLoading = ({ sentence }: TLoading) => {
+const TopLoading = ({ sentence, setIsCreated }: TLoading) => {
   const [is502Error, setIs502Error] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,6 +32,10 @@ const TopLoading = ({ sentence }: TLoading) => {
   if (error) {
     console.log("エラー発生");
     setIs502Error(true);
+  }
+
+  if (!isLoading) {
+    setIsCreated(true);
   }
 
   const setQuizzes = useSetRecoilState(quizListState);
