@@ -18,7 +18,6 @@ export type TQuizProps = {
 
 export type TLoading = {
   sentence: string;
-  setIsCreated: Dispatch<SetStateAction<boolean>>;
 };
 
 export type TModelName = "gpt-3.5-turbo" | "gpt-3.5-turbo-16k";

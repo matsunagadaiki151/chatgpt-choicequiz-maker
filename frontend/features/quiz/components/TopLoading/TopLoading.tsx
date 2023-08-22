@@ -4,28 +4,28 @@ import useSWR from "swr";
 import { getQuizFromSentence } from "../../api/getQuiz";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
-import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
-import { useEffect, useState } from "react";
-import { TLoading } from "../../types/QuizType";
+import { Suspense, useEffect, useState } from "react";
+import { TLoading, TModelName } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 
-const TopLoading = ({ sentence, setIsCreated }: TLoading) => {
+const fetcher = (url: string, sentence: string, modelName: TModelName) => {
+  const quizzes = getQuizFromSentence(url, sentence, modelName);
+  return quizzes;
+};
+
+const TopLoading = ({ sentence }: TLoading) => {
   const [is502Error, setIs502Error] = useState<boolean>(false);
 
   useEffect(() => {
     setIs502Error(false);
   }, []);
 
-  const fetcher = (url: string) => {
-    return getQuizFromSentence(url, sentence, modelName);
-  };
-
   const modelName = useRecoilValue(modelNameState);
   const QUIZ_NUM = 5;
-  const { data, error, isLoading } = useSWR(
-    "http://localhost:8000/create",
-    fetcher,
+  const { data, error } = useSWR(
+    ["http://localhost:8000/create", sentence, modelName],
+    ([url, sentence, modelName]) => fetcher(url, sentence, modelName),
     { suspense: true }
   );
 
@@ -34,15 +34,10 @@ const TopLoading = ({ sentence, setIsCreated }: TLoading) => {
     setIs502Error(true);
   }
 
-  if (!isLoading) {
-    setIsCreated(true);
-  }
-
   const setQuizzes = useSetRecoilState(quizListState);
   const setQuizIsCorrects = useSetRecoilState(quizIsCorrectState);
 
   useEffect(() => {
-    console.log(is502Error);
     if (data !== undefined) {
       setQuizzes(data);
       setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
@@ -51,12 +46,9 @@ const TopLoading = ({ sentence, setIsCreated }: TLoading) => {
 
   return (
     <>
-      {!isLoading && !is502Error && (
+      {!is502Error && (
         <div className="flex flex-col justify-between items-center space-y-4">
           <div>クイズの作成が完了しました！！</div>
-          <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
-            クイズを開始する
-          </LinkButton>
         </div>
       )}
     </>

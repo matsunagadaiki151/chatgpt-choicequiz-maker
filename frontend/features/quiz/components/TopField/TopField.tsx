@@ -7,21 +7,23 @@ import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { SENTENCE_LENGTH } from "../../const/layoutConstants";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { modelNameState } from "../../states/modelNameState";
 import RadioTab from "@/components/RadioTab/RadioTab";
 import { TModelName } from "../../types/QuizType";
 import Warning from "../Warning/Warning";
 import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
+import LinkButton from "@/components/LinkButton/LinkButton";
+import { quizListState } from "../../states/quizListState";
 
 const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isCreated, setIsCreated] = useState<boolean>(false);
+  const [startLoading, setStartLoading] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
   const [modelName, setModelName] = useRecoilState(modelNameState);
+  const [quizzes, setQuizzes] = useRecoilState(quizListState);
 
   const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
   const modelDict: { [name: string]: TModelName } = {
@@ -29,17 +31,20 @@ const TopField = () => {
     "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
   };
 
+  console.log(quizzes);
+
   useEffect(() => {
     setModelName("gpt-3.5-turbo");
+    setQuizzes(undefined);
   }, []);
 
   const topButtonClick = async () => {
-    setIsLoading(true);
+    setStartLoading(true);
   };
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     SetSentence(e.target.value);
-    setIsLoading(false);
+    setStartLoading(false);
   };
 
   const onModelOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,14 +73,19 @@ const TopField = () => {
         </Button>
         <div>
           <Warning sentence={sentence} selectedModelName={modelName} />
-          {(isLoading || isCreated) && (
+          {startLoading && (
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <Suspense fallback={<Loading />}>
-                <TopLoading sentence={sentence} setIsCreated={setIsCreated} />
+                <TopLoading sentence={sentence} />
               </Suspense>
             </ErrorBoundary>
           )}
         </div>
+        {quizzes !== undefined && (
+          <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
+            クイズを開始する
+          </LinkButton>
+        )}
       </div>
     </>
   );
