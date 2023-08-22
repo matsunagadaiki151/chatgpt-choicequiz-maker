@@ -2,12 +2,10 @@
 
 import Button from "@/components/Button/Button";
 import SentenceField from "@/components/SententceField/SentenceField";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
-import { SENTENCE_LENGTH } from "../../const/layoutConstants";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { modelNameState } from "../../states/modelNameState";
 import RadioTab from "@/components/RadioTab/RadioTab";
 import { TModelName } from "../../types/QuizType";
