@@ -18,7 +18,6 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
 
 const TopField = () => {
-  const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [startLoading, setStartLoading] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
@@ -31,14 +30,13 @@ const TopField = () => {
     "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
   };
 
-  console.log(quizzes);
-
   useEffect(() => {
     setModelName("gpt-3.5-turbo");
     setQuizzes(undefined);
   }, []);
 
   const topButtonClick = async () => {
+    setQuizzes(undefined);
     setStartLoading(true);
   };
 
@@ -82,9 +80,14 @@ const TopField = () => {
           )}
         </div>
         {quizzes !== undefined && (
-          <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
-            クイズを開始する
-          </LinkButton>
+          <>
+            <div className="flex flex-col justify-between items-center space-y-4">
+              <div>クイズの作成が完了しました！！</div>
+            </div>
+            <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
+              クイズを開始する
+            </LinkButton>
+          </>
         )}
       </div>
     </>

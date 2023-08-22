@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 import { getQuizFromSentence } from "../../api/getQuiz";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { Suspense, useEffect, useState } from "react";
@@ -22,9 +22,14 @@ const TopLoading = ({ sentence }: TLoading) => {
   }, []);
 
   const modelName = useRecoilValue(modelNameState);
+  const [quizzes, setQuizzes] = useRecoilState(quizListState);
+
   const QUIZ_NUM = 5;
+
   const { data, error } = useSWR(
-    ["http://localhost:8000/create", sentence, modelName],
+    quizzes === undefined
+      ? ["http://localhost:8000/create", sentence, modelName]
+      : null,
     ([url, sentence, modelName]) => fetcher(url, sentence, modelName),
     { suspense: true }
   );
@@ -33,8 +38,6 @@ const TopLoading = ({ sentence }: TLoading) => {
     console.log("エラー発生");
     setIs502Error(true);
   }
-
-  const setQuizzes = useSetRecoilState(quizListState);
   const setQuizIsCorrects = useSetRecoilState(quizIsCorrectState);
 
   useEffect(() => {
@@ -44,15 +47,7 @@ const TopLoading = ({ sentence }: TLoading) => {
     }
   }, []);
 
-  return (
-    <>
-      {!is502Error && (
-        <div className="flex flex-col justify-between items-center space-y-4">
-          <div>クイズの作成が完了しました！！</div>
-        </div>
-      )}
-    </>
-  );
+  return <>{!is502Error && <div></div>}</>;
 };
 
 export default TopLoading;
