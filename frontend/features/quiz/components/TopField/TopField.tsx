@@ -14,11 +14,12 @@ import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
+import { isLoadingState } from "../../states/isLoadingState";
 
 const TopField = () => {
   const [sentence, SetSentence] = useState<string>("");
-  const [startLoading, setStartLoading] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
+  const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
   const [modelName, setModelName] = useRecoilState(modelNameState);
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
 
@@ -35,12 +36,12 @@ const TopField = () => {
 
   const topButtonClick = async () => {
     setQuizzes(undefined);
-    setStartLoading(true);
+    setIsLoading(true);
   };
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     SetSentence(e.target.value);
-    setStartLoading(false);
+    setIsLoading(false);
   };
 
   const onModelOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +70,7 @@ const TopField = () => {
         </Button>
         <div>
           <Warning sentence={sentence} selectedModelName={modelName} />
-          {startLoading && (
+          {isLoading && (
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <Suspense fallback={<Loading />}>
                 <TopLoading sentence={sentence} />
