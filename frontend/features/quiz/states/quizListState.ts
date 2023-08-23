@@ -4,8 +4,8 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
-export const quizListState = atom<TQuiz[]>({
+export const quizListState = atom<TQuiz[] | undefined>({
   key: "quizListState",
-  default: [],
+  default: undefined,
   effects_UNSTABLE: [persistAtom],
 });
