@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 export type TQuestion = {
   questionId: number;
@@ -35,10 +35,4 @@ export type THeader = {
 export type TFooter = {
   author: string;
   createYear: number;
-};
-
-export type TRadioTab = {
-  options: string[];
-  selectedOption: string;
-  onOptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
