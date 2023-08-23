@@ -8,18 +8,11 @@ import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { judgeCorrect } from "../../api/judgeCorrect";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
-import { useRouter } from "next/navigation";
 
 const Quiz = ({ id }: TQuizProps) => {
-  const router = useRouter();
   const quizList = useRecoilValue(quizListState);
   const [quizIsCorrects, setQuizIsCorrects] =
     useRecoilState(quizIsCorrectState);
-
-  if (quizList === undefined) {
-    router.push("/");
-    return;
-  }
 
   const quiz = quizList[id - 1];
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
