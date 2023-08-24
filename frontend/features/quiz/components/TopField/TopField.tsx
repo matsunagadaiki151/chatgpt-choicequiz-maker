@@ -15,6 +15,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
 import { isLoadingState } from "../../states/isLoadingState";
+import ErrorMessage from "../TopLoading/ErrorMessage";
 
 const TopField = () => {
   const [sentence, SetSentence] = useState<string>("");
@@ -22,6 +23,7 @@ const TopField = () => {
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
   const [modelName, setModelName] = useRecoilState(modelNameState);
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
+  const [occurError, setOccurError] = useState<boolean>(false);
 
   const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
   const modelDict: { [name: string]: TModelName } = {
@@ -37,6 +39,7 @@ const TopField = () => {
   const topButtonClick = async () => {
     setQuizzes(undefined);
     setIsLoading(true);
+    setOccurError(false);
   };
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -70,13 +73,22 @@ const TopField = () => {
         </Button>
         <div>
           <Warning sentence={sentence} selectedModelName={modelName} />
-          {isLoading && (
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Suspense fallback={<Loading />}>
-                <TopLoading sentence={sentence} />
-              </Suspense>
+          {!occurError && (
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={() => {
+                setIsLoading(false);
+                setOccurError(true);
+              }}
+            >
+              {isLoading && (
+                <Suspense fallback={<Loading />}>
+                  <TopLoading sentence={sentence} />
+                </Suspense>
+              )}
             </ErrorBoundary>
           )}
+          {occurError && <ErrorMessage />}
         </div>
         {quizzes !== undefined && (
           <>
