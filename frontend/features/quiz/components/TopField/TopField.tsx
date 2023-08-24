@@ -6,14 +6,41 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, Suspense, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
-import { SENTENCE_LENGTH } from "../../const/layoutConstants";
+import { useRecoilState } from "recoil";
+import { modelNameState } from "../../states/modelNameState";
+import RadioTab from "@/components/RadioTab/RadioTab";
+import { TModelName } from "../../types/QuizType";
+import Warning from "../Warning/Warning";
+import { ErrorFallback } from "../TopLoading/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
+import LinkButton from "@/components/LinkButton/LinkButton";
+import { quizListState } from "../../states/quizListState";
+import { isLoadingState } from "../../states/isLoadingState";
+import ErrorMessage from "../TopLoading/ErrorMessage";
 
 const TopField = () => {
   const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
+  const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
+  const [modelName, setModelName] = useRecoilState(modelNameState);
+  const [quizzes, setQuizzes] = useRecoilState(quizListState);
+  const [occurError, setOccurError] = useState<boolean>(false);
+
+  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
+  const modelDict: { [name: string]: TModelName } = {
+    "GPT3.5Turbo": "gpt-3.5-turbo",
+    "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
+  };
+
+  useEffect(() => {
+    setModelName("gpt-3.5-turbo");
+    setQuizzes(undefined);
+  }, []);
+
   const topButtonClick = async () => {
     setIsLoading(true);
+    setOccurError(false);
   };
 
   const onSentenceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,20 +61,34 @@ const TopField = () => {
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>
-        {sentence.length > SENTENCE_LENGTH && (
-          <div className="text-yellow-500 text-center">
-            <div className="font-bold text-center text-xl mb-2">Warning</div>
-            <div>
-              文章が3000文字以上だと精度が悪化することがあります
-              <br />
-              また、クイズの作成に時間がかかります
+        <div>
+          <Warning sentence={sentence} selectedModelName={modelName} />
+          {!occurError && (
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={() => {
+                setIsLoading(false);
+                setOccurError(true);
+              }}
+            >
+              {isLoading && (
+                <Suspense fallback={<Loading />}>
+                  <TopLoading sentence={sentence} />
+                </Suspense>
+              )}
+            </ErrorBoundary>
+          )}
+          {occurError && <ErrorMessage />}
+        </div>
+        {quizzes !== undefined && (
+          <>
+            <div className="flex flex-col justify-between items-center space-y-4">
+              <div>クイズの作成が完了しました！！</div>
             </div>
-          </div>
-        )}
-        {isLoading && (
-          <Suspense fallback={<Loading />}>
-            <TopLoading sentence={sentence} />
-          </Suspense>
+            <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
+              クイズを開始する
+            </LinkButton>
+          </>
         )}
       </div>
     </>
