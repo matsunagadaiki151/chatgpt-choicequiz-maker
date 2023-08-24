@@ -2,7 +2,8 @@
 
 import Button from "@/components/Button/Button";
 import SentenceField from "@/components/SententceField/SentenceField";
-import { ChangeEvent, Suspense, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, Suspense, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { useRecoilState } from "recoil";
@@ -18,6 +19,7 @@ import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
 
 const TopField = () => {
+  const router = useRouter();
   const [sentence, SetSentence] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
@@ -37,7 +39,6 @@ const TopField = () => {
   }, []);
 
   const topButtonClick = async () => {
-    setQuizzes(undefined);
     setIsLoading(true);
     setOccurError(false);
   };
@@ -47,23 +48,12 @@ const TopField = () => {
     setIsLoading(false);
   };
 
-  const onModelOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    var value = e.target.value;
-    setSelectedOption(value);
-    setModelName(modelDict[e.target.value]);
-  };
-
   return (
     <>
-      <div className="w-1/2 m-auto flex flex-col space-y-10 items-center">
+      <div className="flex flex-col space-y-10 items-center">
         <div className="text-4xl text-bold font-marugo text-giray">
           問題を作ろう!!
         </div>
-        <RadioTab
-          options={options}
-          selectedOption={selectedOption}
-          onOptionChange={onModelOptionChange}
-        />
         <SentenceField
           sentence={sentence}
           onSentenceChange={onSentenceChange}
