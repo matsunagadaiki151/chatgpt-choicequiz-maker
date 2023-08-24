@@ -1,25 +1,28 @@
-import axios from "axios";
-import { TQuiz } from "../types/QuizType";
-import { sleep } from "../hooks/timer";
+import axios, { AxiosError } from "axios";
 import { TResponse } from "@/types/pageParam";
 import { convertNewLine } from "../hooks/quizUtil";
 
-// export const getMockQuiz = async (url: string) => {
-//   const res = await axios.get<TQuiz[]>(url);
-
-//   await sleep(2000);
-
-//   const data = res.data;
-//   return data;
-// };
-
-export const getQuizFromSentence = async (url: string, sentence: string) => {
+export const getQuizFromSentence = async (
+  url: string,
+  sentence: string,
+  modelName: string
+) => {
   const convertedSentence = convertNewLine(sentence);
   const headData = {
     text: convertedSentence,
+    model_name: modelName,
   };
 
-  const res = await axios.post<TResponse>(url, headData);
-
-  return res.data.Items;
+  try {
+    const res = await axios.post<TResponse>(url, headData);
+    return res.data.Items;
+  } catch (error) {
+    if (
+      axios.isAxiosError(error) &&
+      error.response &&
+      error.response.status === 502
+    ) {
+      throw Error("");
+    }
+  }
 };
