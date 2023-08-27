@@ -1,7 +1,6 @@
 import Quiz from "@/features/quiz/components/Quiz/Quiz";
 import QuizNav from "@/features/quiz/components/QuizNav/QuizNav";
 import { TQuizPageParam } from "@/types/pageParam";
-import Link from "next/link";
 
 export default async function Page({ params }: TQuizPageParam) {
   const { id } = params;
