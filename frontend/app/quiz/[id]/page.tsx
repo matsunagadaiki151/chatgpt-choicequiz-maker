@@ -12,13 +12,13 @@ export default async function Page({ params }: TQuizPageParam) {
   }
 
   return (
-    <section className="h-full flex flex-col justify-betweeen">
+    <div className="h-full flex flex-col justify-betweeen">
       <div className="flex-1">
         <Quiz id={id} />
       </div>
       <div className="mx-24 mb-20">
         <QuizNav quizId={id} maxQuizNum={5} />
       </div>
-    </section>
+    </div>
   );
 }

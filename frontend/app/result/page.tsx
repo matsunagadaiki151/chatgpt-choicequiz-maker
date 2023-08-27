@@ -3,7 +3,7 @@ import Result from "@/features/quiz/components/Result";
 
 export default async function Page() {
   return (
-    <section className="h-full flex flex-col items-center">
+    <div className="h-full flex flex-col items-center">
       <div className="text-3xl text-center font-marugo text-giray flex-1">
         <Result />
       </div>
@@ -12,6 +12,6 @@ export default async function Page() {
           トップへ戻る
         </LinkButton>
       </div>
-    </section>
+    </div>
   );
 }
