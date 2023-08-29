@@ -9,23 +9,31 @@ import { judgeCorrect } from "../../api/judgeCorrect";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 import { useRouter } from "next/navigation";
+import { selectedOptionsState } from "../../states/selectedOptionsState";
 
 const Quiz = ({ id }: TQuizProps) => {
   const router = useRouter();
   const quizList = useRecoilValue(quizListState);
+  const [selectedOptions, setSelectedOptions] =
+    useRecoilState(selectedOptionsState);
   const [quizIsCorrects, setQuizIsCorrects] =
     useRecoilState(quizIsCorrectState);
 
-  if (quizList === undefined) {
+  if (quizList === undefined || selectedOptions === undefined) {
     router.push("/");
     return;
   }
 
   const quiz = quizList[id - 1];
-  const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
+  const selectedOption = selectedOptions[id - 1];
 
-  // useState
-  const [selectedOption, setSelectedOption] = useState("");
+  const setSelectedOption = (option: string) => {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[id - 1] = option;
+    setSelectedOptions(newSelectedOptions);
+  };
+
+  const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
   // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);
