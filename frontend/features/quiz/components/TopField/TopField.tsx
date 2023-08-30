@@ -18,6 +18,7 @@ import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
 
 const TopField = () => {
+  const [hasMounted, setHasMounted] = useState<boolean>(false);
   const [sentence, SetSentence] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
@@ -32,6 +33,7 @@ const TopField = () => {
   };
 
   useEffect(() => {
+    setHasMounted(true);
     setModelName("gpt-3.5-turbo");
     setQuizzes(undefined);
   }, []);
@@ -90,7 +92,7 @@ const TopField = () => {
           )}
           {occurError && <ErrorMessage />}
         </div>
-        {quizzes !== undefined && (
+        {quizzes !== undefined && hasMounted && (
           <div className="flex flex-col justify-between items-center space-y-4">
             <div>クイズの作成が完了しました！！</div>
             <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
