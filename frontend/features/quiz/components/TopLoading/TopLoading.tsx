@@ -10,6 +10,7 @@ import { TLoading, TModelName } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 import { isLoadingState } from "../../states/isLoadingState";
 import { selectedOptionsState } from "../../states/selectedOptionsState";
+import { endpoint } from "@/libs/endpoint";
 
 const fetcher = (url: string, sentence: string, modelName: TModelName) => {
   const quizzes = getQuizFromSentence(url, sentence, modelName);
@@ -31,9 +32,7 @@ const TopLoading = ({ sentence }: TLoading) => {
   const QUIZ_NUM = 5;
 
   const { data, error } = useSWR(
-    quizzes === undefined
-      ? ["http://localhost:8000/create", sentence, modelName]
-      : null,
+    quizzes === undefined ? [`${endpoint}/create`, sentence, modelName] : null,
     ([url, sentence, modelName]) => fetcher(url, sentence, modelName),
     { suspense: true }
   );
