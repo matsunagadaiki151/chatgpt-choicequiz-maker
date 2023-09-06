@@ -181,3 +181,5 @@ sandbox/*
 .vscode
 
 .gitignore
+
+copilot
