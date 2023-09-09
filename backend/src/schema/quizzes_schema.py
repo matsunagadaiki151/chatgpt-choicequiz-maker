@@ -1,6 +1,4 @@
-from typing import List
-
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 
 
 class CreateHeader(BaseModel):
@@ -16,9 +14,9 @@ class Choice(BaseModel):
 class Quiz(BaseModel):
     quiz_id: int = Field(description="quiz_id")
     question: str = Field(description="quiz sentence")
-    choice: List[Choice] = Field("choices")
-    answer_id: int = Field("correct choice id")
+    choice: list[Choice] = Field(description="choices")
+    answer_id: int = Field(description="correct choice id")
 
 
 class Quizzes(BaseModel):
-    Items: List[Quiz] = Field(description="quiz items")
+    Items: list[Quiz] = Field(..., description="quiz items")
