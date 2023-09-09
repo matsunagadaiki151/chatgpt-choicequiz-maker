@@ -14,7 +14,11 @@ export const getQuizFromSentence = async (
   };
 
   try {
-    const res = await axios.post<TResponse>(url, headData);
+    const res = await axios.post<TResponse>(url, headData, {
+      headers: {
+        withCredentials: true,
+      },
+    });
     return res.data.Items;
   } catch (error) {
     if (
