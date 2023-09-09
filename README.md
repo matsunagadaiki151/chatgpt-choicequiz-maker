@@ -81,7 +81,7 @@ docker compose -f "docker-compose.yml" up -d --build
 
 
 ## License
-
+[MIT](https://opensource.org/license/mit/)
 
  
 
