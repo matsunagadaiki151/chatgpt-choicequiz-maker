@@ -1,9 +1,11 @@
 from langchain import PromptTemplate
-from langchain.chains import LLMChain, SimpleSequentialChain
+from langchain.chains import SimpleSequentialChain
+from langchain.chains.openai_functions import create_structured_output_chain
 from langchain.chains.summarize import load_summarize_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.docstore.document import Document
 from langchain.output_parsers import PydanticOutputParser
+from langchain.prompts import ChatPromptTemplate
 from langchain.schema import OutputParserException
 from langchain.text_splitter import CharacterTextSplitter
 
@@ -16,13 +18,8 @@ class GPTService:
         self.parser = PydanticOutputParser(pydantic_object=Quizzes)
         self.recommend_length = recommend_length
         self.text = text
-        self.template = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
-        誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。
-
-        説明文: {document}
-
-        {format_instructions}
-        """
+        self.system_prompt = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
+        誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。"""
 
     @staticmethod
     def from_model_name(text, model_name):
@@ -33,15 +30,17 @@ class GPTService:
         return GPTService(text, model_name, model_length_dic[model_name])
 
     def create_quiz_normal(self):
-        prompt = PromptTemplate(
-            template=self.template,
-            input_variables=["document"],
-            partial_variables={
-                "format_instructions": self.parser.get_format_instructions()
-            },
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", self.system_prompt),
+                ("human", "{input}"),
+                ("human", "クイズは指定のフォーマットで出力してください"),
+            ]
         )
 
-        chain = LLMChain(llm=self.llm, prompt=prompt)
+        chain = create_structured_output_chain(
+            Quizzes, self.llm, prompt, verbose=False
+        )
 
         output = chain.run(self.text)
         return output
@@ -89,14 +88,17 @@ class GPTService:
             combine_prompt=map_prompt,
         )
 
-        prompt_subject = PromptTemplate(
-            template=self.template,
-            input_variables=["document"],
-            partial_variables={
-                "format_instructions": self.parser.get_format_instructions()
-            },
+        prompt_subject = ChatPromptTemplate.from_messages(
+            [
+                ("system", self.system_prompt),
+                ("human", "{input}"),
+                ("human", "クイズは指定のフォーマットで出力してください"),
+            ]
         )
-        chain_subject = LLMChain(llm=self.llm, prompt=prompt_subject)
+
+        chain_subject = create_structured_output_chain(
+            Quizzes, self.llm, prompt_subject, verbose=False
+        )
         overall_chain_map_reduce = SimpleSequentialChain(
             chains=[summary_chain, chain_subject]
         )
@@ -104,12 +106,11 @@ class GPTService:
 
         return output
 
-    def _parse_output(self, output: str):
+    def _check_parse(self, output: Quizzes):
         try:
-            quizzes = self.parser.parse(output)
-            if len(quizzes.Items) != 5:
+            if len(output.Items) != 5:
                 raise ValueError
-            return quizzes
+            return output
         except (OutputParserException, ValueError):
             raise ValueError("Invalida data structure")
 
@@ -118,4 +119,4 @@ class GPTService:
             output = self.create_quiz_normal()
         else:
             output = self.create_quiz_map_reduce()
-        return self._parse_output(output)
+        return self._check_parse(output)
