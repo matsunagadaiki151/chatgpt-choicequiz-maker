@@ -16,6 +16,7 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
 import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
+import { quizNumState } from "../../states/quizNumState";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -24,6 +25,7 @@ const TopField = () => {
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
   const [modelName, setModelName] = useRecoilState(modelNameState);
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
+  const [quizNum, setQuizNum] = useRecoilState(quizNumState);
   const [occurError, setOccurError] = useState<boolean>(false);
 
   const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
