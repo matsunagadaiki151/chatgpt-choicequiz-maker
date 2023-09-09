@@ -18,13 +18,7 @@ class GPTService:
         self.parser = PydanticOutputParser(pydantic_object=Quizzes)
 
         self.text = text
-
-    @staticmethod
-    def from_model_name(text, model_name):
-        return GPTService(text, model_name)
-
-    def create_quiz_normal(self):
-        template = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
+        self.template = """以下の説明文から日本語の文章の4択クイズを5つ作成し特定のフォーマットで出力してください。
         誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。
 
         説明文: {document}
@@ -32,8 +26,13 @@ class GPTService:
         {format_instructions}
         """
 
+    @staticmethod
+    def from_model_name(text, model_name):
+        return GPTService(text, model_name)
+
+    def create_quiz_normal(self):
         prompt = PromptTemplate(
-            template=template,
+            template=self.template,
             input_variables=["document"],
             partial_variables={
                 "format_instructions": self.parser.get_format_instructions()
@@ -71,17 +70,9 @@ class GPTService:
             map_prompt=map_prompt,
             combine_prompt=map_prompt,
         )
-        template = """以下の説明文から4択クイズを5つ作成し特定のフォーマットで出力してください。
-        クイズは必ず日本語で作成してください。
-        また誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。
-
-        説明文: {document}
-
-        {format_instructions}
-        """
 
         prompt_subject = PromptTemplate(
-            template=template,
+            template=self.template,
             input_variables=["document"],
             partial_variables={
                 "format_instructions": self.parser.get_format_instructions()
