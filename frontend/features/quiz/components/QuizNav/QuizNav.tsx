@@ -1,20 +1,21 @@
+"use client";
 import LinkButton from "@/components/LinkButton/LinkButton";
+import { useRecoilValue } from "recoil";
+import { quizNumState } from "../../states/quizNumState";
 
 type TQuizNav = {
   quizId: number;
-  maxQuizNum: number;
   isDebug?: boolean;
 };
 
-function QuizNav({ quizId, maxQuizNum, isDebug = false }: TQuizNav) {
+function QuizNav({ quizId, isDebug = false }: TQuizNav) {
+  const quizNum = useRecoilValue(quizNumState);
   const MIN_QUIZ_NUM = 1;
   const visiblePreviosLink =
     isDebug || quizId > MIN_QUIZ_NUM ? "" : "invisible";
-  const visibleFinishLink = isDebug || quizId >= maxQuizNum ? "" : "invisible";
+  const visibleFinishLink = isDebug || quizId >= quizNum ? "" : "invisible";
   const visibleNextLink =
-    isDebug || (quizId >= MIN_QUIZ_NUM && quizId < maxQuizNum)
-      ? ""
-      : "invisible";
+    isDebug || (quizId >= MIN_QUIZ_NUM && quizId < quizNum) ? "" : "invisible";
   return (
     <div className="font-marugo text-white flex justify-between">
       <div className={visiblePreviosLink} role="previuos">

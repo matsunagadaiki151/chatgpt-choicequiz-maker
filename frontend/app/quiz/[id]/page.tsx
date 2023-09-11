@@ -16,7 +16,7 @@ export default async function Page({ params }: TQuizPageParam) {
         <Quiz id={id} />
       </div>
       <div className="mx-24 mb-20">
-        <QuizNav quizId={id} maxQuizNum={5} />
+        <QuizNav quizId={id} />
       </div>
     </div>
   );
