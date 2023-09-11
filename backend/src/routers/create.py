@@ -10,9 +10,10 @@ router = APIRouter()
 @router.post("/create/")
 def read_item(create_header: CreateHeader):
     text = create_header.text
+    quiz_num = create_header.quiz_num
     text.replace("¥n", "")
     try:
-        quizzes = create_quiz(text, create_header.model_name)
+        quizzes = create_quiz(text, create_header.model_name, quiz_num)
     except ValueError:
         raise HTTPException(
             status_code=502, detail="クイズの作成に失敗しました。別の文章で試してみてください。"

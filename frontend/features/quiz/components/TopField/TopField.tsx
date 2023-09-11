@@ -16,6 +16,8 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
 import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
+import { quizNumState } from "../../states/quizNumState";
+import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -70,6 +72,7 @@ const TopField = () => {
           sentence={sentence}
           onSentenceChange={onSentenceChange}
         />
+        <QuizNumInput />
         <Button bgColor="blue" onButtonClick={topButtonClick}>
           問題を作成する
         </Button>

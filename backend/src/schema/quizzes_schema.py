@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class CreateHeader(BaseModel):
     text: str = Field(description="input text")
     model_name: str = Field(description="model_name (ex: 'gpt-3.5-turbo')")
+    quiz_num: int = Field(description="number of quiz")
 
 
 class Choice(BaseModel):

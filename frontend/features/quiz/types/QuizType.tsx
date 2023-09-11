@@ -26,3 +26,9 @@ export type TWarning = {
   sentence: string;
   selectedModelName: TModelName;
 };
+
+export type TQuizData = {
+  sentence: string;
+  modelName: TModelName;
+  quizNum: number;
+};
