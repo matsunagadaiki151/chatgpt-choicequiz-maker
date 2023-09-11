@@ -6,14 +6,15 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { useEffect, useState } from "react";
-import { TLoading, TModelName } from "../../types/QuizType";
+import { TLoading, TModelName, TQuizData } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 import { isLoadingState } from "../../states/isLoadingState";
 import { selectedOptionsState } from "../../states/selectedOptionsState";
 import { endpoint } from "@/libs/endpoint";
+import { quizNumState } from "../../states/quizNumState";
 
-const fetcher = (url: string, sentence: string, modelName: TModelName) => {
-  const quizzes = getQuizFromSentence(url, sentence, modelName);
+const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
+  const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });
   return quizzes;
 };
 
@@ -21,6 +22,7 @@ const TopLoading = ({ sentence }: TLoading) => {
   const [is502Error, setIs502Error] = useState<boolean>(false);
   const setIsLoading = useSetRecoilState(isLoadingState);
   const setSelectedOptions = useSetRecoilState(selectedOptionsState);
+  const quizNum = useRecoilValue(quizNumState);
 
   useEffect(() => {
     setIs502Error(false);
@@ -29,11 +31,12 @@ const TopLoading = ({ sentence }: TLoading) => {
   const modelName = useRecoilValue(modelNameState);
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
 
-  const QUIZ_NUM = 5;
-
   const { data, error } = useSWR(
-    quizzes === undefined ? [`${endpoint}/create`, sentence, modelName] : null,
-    ([url, sentence, modelName]) => fetcher(url, sentence, modelName),
+    quizzes === undefined
+      ? [`${endpoint}/create`, sentence, modelName, quizNum]
+      : null,
+    ([url, sentence, modelName]) =>
+      fetcher(url, { sentence, modelName, quizNum }),
     { suspense: true }
   );
 
@@ -46,8 +49,8 @@ const TopLoading = ({ sentence }: TLoading) => {
   useEffect(() => {
     if (data !== undefined) {
       setQuizzes(data);
-      setQuizIsCorrects(Array(QUIZ_NUM).fill(false));
-      setSelectedOptions(Array(QUIZ_NUM).fill(""));
+      setQuizIsCorrects(Array(quizNum).fill(false));
+      setSelectedOptions(Array(quizNum).fill(""));
       setIsLoading(false);
     }
   }, []);
