@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { quizListState } from "../../states/quizListState";
 import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { useEffect, useState } from "react";
-import { TLoading, TModelName, TQuizData } from "../../types/QuizType";
+import { TLoading, TQuizData } from "../../types/QuizType";
 import { modelNameState } from "../../states/modelNameState";
 import { isLoadingState } from "../../states/isLoadingState";
 import { selectedOptionsState } from "../../states/selectedOptionsState";
