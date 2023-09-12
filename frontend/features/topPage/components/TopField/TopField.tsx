@@ -6,18 +6,17 @@ import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { useRecoilState } from "recoil";
-import { modelNameState } from "../../states/modelNameState";
 import RadioTab from "@/components/RadioTab/RadioTab";
-import { TModelName } from "../../types/QuizType";
 import Warning from "../Warning/Warning";
 import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
-import { quizListState } from "../../states/quizListState";
-import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
-import { quizNumState } from "../../states/quizNumState";
 import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
+import { isLoadingState } from "@/features/quiz/states/isLoadingState";
+import { modelNameState } from "@/features/quiz/states/modelNameState";
+import { quizListState } from "@/features/quiz/states/quizListState";
+import { TModelName } from "@/features/quiz/types/QuizType";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
