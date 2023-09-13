@@ -1,5 +1,5 @@
 import LinkButton from "@/components/LinkButton/LinkButton";
-import Result from "@/features/quiz/components/Result";
+import Result from "@/features/result/components/Result";
 
 export default async function Page() {
   return (
