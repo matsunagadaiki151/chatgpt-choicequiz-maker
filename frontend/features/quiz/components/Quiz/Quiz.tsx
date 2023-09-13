@@ -3,13 +3,13 @@
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { TQuizProps } from "../../types/QuizType";
-import { quizListState } from "../../states/quizListState";
-import { quizIsCorrectState } from "../../states/quizIsCorrectState";
+import { quizListState } from "../../stores/quizListState";
+import { quizIsCorrectState } from "../../stores/quizIsCorrectState";
 import { judgeCorrect } from "../../api/judgeCorrect";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 import { useRouter } from "next/navigation";
-import { selectedOptionsState } from "../../states/selectedOptionsState";
+import { selectedOptionsState } from "../../stores/selectedOptionsState";
 
 const Quiz = ({ id }: TQuizProps) => {
   const router = useRouter();

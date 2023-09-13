@@ -13,9 +13,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import ErrorMessage from "../TopLoading/ErrorMessage";
 import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
-import { isLoadingState } from "@/features/quiz/states/isLoadingState";
-import { modelNameState } from "@/features/quiz/states/modelNameState";
-import { quizListState } from "@/features/quiz/states/quizListState";
+import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
+import { modelNameState } from "@/features/quiz/stores/modelNameState";
+import { quizListState } from "@/features/quiz/stores/quizListState";
 import { TModelName } from "@/features/quiz/types/QuizType";
 
 const TopField = () => {

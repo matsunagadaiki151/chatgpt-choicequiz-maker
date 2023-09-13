@@ -1,4 +1,4 @@
-import { quizNumState } from "@/features/quiz/states/quizNumState";
+import { quizNumState } from "@/features/quiz/stores/quizNumState";
 import { ChangeEvent, ChangeEventHandler } from "react";
 import { useRecoilState } from "recoil";
 

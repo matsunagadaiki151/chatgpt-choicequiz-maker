@@ -1,4 +1,4 @@
-import { isLoadingState } from "@/features/quiz/states/isLoadingState";
+import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
 import { TRadioTab } from "@/types/componentTypes";
 import { useRecoilValue } from "recoil";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { isLoadingState } from "@/features/quiz/states/isLoadingState";
+import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
 import { TQuestion } from "@/types/componentTypes";
 import React, { ChangeEvent, useState } from "react";
 import { useRecoilValue } from "recoil";

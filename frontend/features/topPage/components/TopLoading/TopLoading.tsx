@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { endpoint } from "@/libs/endpoint";
 import { TLoading, TQuizData } from "@/features/quiz/types/QuizType";
 import { getQuizFromSentence } from "@/features/quiz/api/getQuiz";
-import { isLoadingState } from "@/features/quiz/states/isLoadingState";
-import { selectedOptionsState } from "@/features/quiz/states/selectedOptionsState";
-import { quizNumState } from "@/features/quiz/states/quizNumState";
-import { modelNameState } from "@/features/quiz/states/modelNameState";
-import { quizListState } from "@/features/quiz/states/quizListState";
-import { quizIsCorrectState } from "@/features/quiz/states/quizIsCorrectState";
+import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
+import { selectedOptionsState } from "@/features/quiz/stores/selectedOptionsState";
+import { quizNumState } from "@/features/quiz/stores/quizNumState";
+import { modelNameState } from "@/features/quiz/stores/modelNameState";
+import { quizListState } from "@/features/quiz/stores/quizListState";
+import { quizIsCorrectState } from "@/features/quiz/stores/quizIsCorrectState";
 
 const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
   const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });
