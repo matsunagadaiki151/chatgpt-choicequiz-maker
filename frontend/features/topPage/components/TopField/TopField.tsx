@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button/Button";
-import SentenceField from "@/components/SententceField/SentenceField";
+import SentenceField from "@/components/TextArea/TextArea";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
