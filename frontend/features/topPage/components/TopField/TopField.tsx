@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "@/components/Button/Button";
-import SentenceField from "@/components/TextArea/TextArea";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
@@ -17,6 +16,7 @@ import { modelNameState } from "@/features/quiz/stores/modelNameState";
 import { quizListState } from "@/features/quiz/stores/quizListState";
 import { TModelName } from "@/features/quiz/types/QuizType";
 import GPTSelector from "../GPTSelector/GPTSelector";
+import SentenceField from "../SentenceField/SentenceField";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
