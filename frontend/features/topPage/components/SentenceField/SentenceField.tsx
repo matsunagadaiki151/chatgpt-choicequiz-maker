@@ -1,7 +1,7 @@
 "use client";
 
 import TextArea, { TTextArea } from "@/components/TextArea/TextArea";
-import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
 import { TQuestion } from "@/types/componentTypes";
 import React, { ChangeEvent, useState } from "react";
 import { useRecoilValue } from "recoil";

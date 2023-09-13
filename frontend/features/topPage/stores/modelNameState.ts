@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { TModelName } from "../types/QuizType";
+import { TModelName } from "../../quiz/types/QuizType";
 
 const { persistAtom } = recoilPersist();
 

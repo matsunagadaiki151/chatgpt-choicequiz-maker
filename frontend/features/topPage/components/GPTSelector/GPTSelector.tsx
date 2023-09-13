@@ -1,5 +1,5 @@
 import RadioTab, { TRadioTab } from "@/components/RadioTab/RadioTab";
-import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
 import { useRecoilValue } from "recoil";
 
 type TGPTSelector = Pick<

@@ -1,5 +1,5 @@
-import { quizNumState } from "@/features/quiz/stores/quizNumState";
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { quizNumState } from "@/stores/quizNumState";
+import { ChangeEvent } from "react";
 import { useRecoilState } from "recoil";
 
 const QuizNumInput = () => {

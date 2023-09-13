@@ -5,13 +5,13 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { endpoint } from "@/libs/endpoint";
 import { TLoading, TQuizData } from "@/features/quiz/types/QuizType";
-import { getQuizFromSentence } from "@/features/quiz/api/getQuiz";
-import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
-import { selectedOptionsState } from "@/features/quiz/stores/selectedOptionsState";
-import { quizNumState } from "@/features/quiz/stores/quizNumState";
-import { modelNameState } from "@/features/quiz/stores/modelNameState";
-import { quizListState } from "@/features/quiz/stores/quizListState";
-import { quizIsCorrectState } from "@/features/quiz/stores/quizIsCorrectState";
+import { getQuizFromSentence } from "@/features/topPage/api/getQuiz";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
+import { modelNameState } from "@/features/topPage/stores/modelNameState";
+import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
+import { quizListState } from "@/stores/quizListState";
+import { quizNumState } from "@/stores/quizNumState";
+import { selectedOptionsState } from "@/stores/selectedOptionsState";
 
 const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
   const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });

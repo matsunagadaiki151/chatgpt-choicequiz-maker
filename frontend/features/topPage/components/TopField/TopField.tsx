@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button/Button";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
-import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { useRecoilState } from "recoil";
 import Warning from "../Warning/Warning";
@@ -11,12 +10,13 @@ import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import ErrorMessage from "../TopLoading/ErrorMessage";
 import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
-import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
-import { modelNameState } from "@/features/quiz/stores/modelNameState";
-import { quizListState } from "@/features/quiz/stores/quizListState";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
+import { modelNameState } from "@/features/topPage/stores/modelNameState";
 import { TModelName } from "@/features/quiz/types/QuizType";
 import GPTSelector from "../GPTSelector/GPTSelector";
 import SentenceField from "../SentenceField/SentenceField";
+import { quizListState } from "@/stores/quizListState";
+import TopLoading from "../TopLoading/TopLoading";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);

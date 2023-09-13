@@ -1,9 +1,8 @@
 "use client";
 import { useRecoilValue } from "recoil";
-import { TQuiz } from "../../types/QuizType";
 import Quiz from "../Quiz/Quiz";
 import QuizNav from "../QuizNav/QuizNav";
-import { quizNumState } from "../../stores/quizNumState";
+import { quizNumState } from "@/stores/quizNumState";
 
 type TQuizPage = {
   id: number;

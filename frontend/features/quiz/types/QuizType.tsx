@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type TChoiceContent = {
   choice_id: number;
   choice_sentence: string;

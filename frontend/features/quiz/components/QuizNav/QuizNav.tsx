@@ -1,7 +1,8 @@
 "use client";
+
 import LinkButton from "@/components/LinkButton/LinkButton";
+import { quizNumState } from "@/stores/quizNumState";
 import { useRecoilValue } from "recoil";
-import { quizNumState } from "../../stores/quizNumState";
 
 type TQuizNav = {
   quizId: number;
