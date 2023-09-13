@@ -9,7 +9,6 @@ import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import ErrorMessage from "../TopLoading/ErrorMessage";
-import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
 import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
 import { modelNameState } from "@/features/topPage/stores/modelNameState";
 import { TModelName } from "@/features/quiz/types/QuizType";
@@ -17,6 +16,7 @@ import GPTSelector from "../GPTSelector/GPTSelector";
 import SentenceField from "../SentenceField/SentenceField";
 import { quizListState } from "@/stores/quizListState";
 import TopLoading from "../TopLoading/TopLoading";
+import QuizNumInput from "../QuizNumInput/QuizNumInput";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
