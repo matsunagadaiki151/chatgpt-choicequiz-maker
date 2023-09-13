@@ -6,7 +6,6 @@ import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { useRecoilState } from "recoil";
-import RadioTab from "@/components/RadioTab/RadioTab";
 import Warning from "../Warning/Warning";
 import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
@@ -17,6 +16,7 @@ import { isLoadingState } from "@/features/quiz/stores/isLoadingState";
 import { modelNameState } from "@/features/quiz/stores/modelNameState";
 import { quizListState } from "@/features/quiz/stores/quizListState";
 import { TModelName } from "@/features/quiz/types/QuizType";
+import GPTSelector from "../GPTSelector/GPTSelector";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -62,7 +62,7 @@ const TopField = () => {
         <div className="text-4xl text-bold font-marugo text-giray">
           問題を作ろう!!
         </div>
-        <RadioTab
+        <GPTSelector
           options={options}
           selectedOption={selectedOption}
           onOptionChange={onModelOptionChange}
