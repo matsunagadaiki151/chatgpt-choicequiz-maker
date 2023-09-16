@@ -27,6 +27,7 @@ class GPTService:
         model_length_dic = {
             "gpt-3.5-turbo": 3000,
             "gpt-3.5-turbo-16k": 12000,
+            "gpt-4": 5000,
         }
         return GPTService(
             text, model_name, model_length_dic[model_name], quiz_num
