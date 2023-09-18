@@ -2,25 +2,23 @@
 import React, { useState as useStateMock } from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import SentenceField from "./SentenceField";
+import TextArea from "./TextArea";
 
 jest.mock("react", () => ({
   ...jest.requireActual("react"),
   useState: jest.fn(),
 }));
 
-describe("SentenceFieldコンポーネント", () => {
+describe("TextAreaコンポーネント", () => {
   test("テキストエリアが表示されること", () => {
-    render(<SentenceField sentence="" onSentenceChange={() => {}} />);
+    render(<TextArea sentence="" onSentenceChange={() => {}} />);
     const textareaElement = screen.getByRole("textbox");
     expect(textareaElement).toBeInTheDocument();
   });
 
   test("テキストエリアの初期値が設定されていること", () => {
     const initialSentence = "初期値のテスト";
-    render(
-      <SentenceField sentence={initialSentence} onSentenceChange={() => {}} />
-    );
+    render(<TextArea sentence={initialSentence} onSentenceChange={() => {}} />);
     const textareaElement = screen.getByRole("textbox");
     expect(textareaElement).toHaveValue(initialSentence);
   });
@@ -31,7 +29,7 @@ describe("SentenceFieldコンポーネント", () => {
     const mockOnSentenceChange = jest.fn();
 
     render(
-      <SentenceField
+      <TextArea
         sentence={initialSentence}
         onSentenceChange={mockOnSentenceChange}
       />

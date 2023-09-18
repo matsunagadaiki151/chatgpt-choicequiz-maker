@@ -1,4 +1,4 @@
-import { TModelName, TWarning } from "../../types/QuizType";
+import { TWarning } from "@/features/quiz/types/QuizType";
 
 const Warning = ({ sentence, selectedModelName }: TWarning) => {
   const recommendLengths: { [name: string]: number } = {

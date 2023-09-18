@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { TQuizProps } from "../../types/QuizType";
-import { quizListState } from "../../states/quizListState";
-import { quizIsCorrectState } from "../../states/quizIsCorrectState";
-import { judgeCorrect } from "../../api/judgeCorrect";
+import { TChoiceContent, TQuizProps, TQuiz } from "../../types/QuizType";
+import { quizIsCorrectState } from "../../../../stores/quizIsCorrectState";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 import { useRouter } from "next/navigation";
-import { selectedOptionsState } from "../../states/selectedOptionsState";
+import { judgeCorrect } from "@/features/result/api/judgeCorrect";
+import { quizListState } from "@/stores/quizListState";
+import { selectedOptionsState } from "@/stores/selectedOptionsState";
 
 const Quiz = ({ id }: TQuizProps) => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const Quiz = ({ id }: TQuizProps) => {
     return;
   }
 
-  const quiz = quizList[id - 1];
+  const quiz: TQuiz = quizList[id - 1];
   const selectedOption = selectedOptions[id - 1];
 
   const setSelectedOption = (option: string) => {
@@ -34,6 +34,7 @@ const Quiz = ({ id }: TQuizProps) => {
   };
 
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
+
   // handler
   const onOptionChange = (option: string) => {
     setSelectedOption(option);

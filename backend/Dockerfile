@@ -15,6 +15,7 @@ COPY poetry.lock .
 # ソースコードをコピー
 COPY . .
 
+RUN poetry update
 RUN poetry install --no-interaction --no-ansi
 
 CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]

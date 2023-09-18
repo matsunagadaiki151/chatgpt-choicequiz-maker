@@ -1,7 +1,7 @@
 "use client";
 
 import { useRecoilValue } from "recoil";
-import { quizIsCorrectSelector } from "../states/quizIsCorrectState";
+import { quizIsCorrectSelector } from "../../../stores/quizIsCorrectState";
 
 const Result = () => {
   const correctCount = useRecoilValue(quizIsCorrectSelector);

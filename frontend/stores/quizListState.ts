@@ -1,11 +1,11 @@
+import { TQuiz } from "@/features/quiz/types/QuizType";
 import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
-import { TModelName } from "../types/QuizType";
 
 const { persistAtom } = recoilPersist();
 
-export const modelNameState = atom<TModelName>({
-  key: "modelNameState",
-  default: "gpt-3.5-turbo",
+export const quizListState = atom<TQuiz[] | undefined>({
+  key: "quizListState",
+  default: undefined,
   effects_UNSTABLE: [persistAtom],
 });

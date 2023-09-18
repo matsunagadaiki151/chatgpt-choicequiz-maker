@@ -3,13 +3,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
-import {
-  author,
-  createYear,
-  siteTitle,
-} from "@/features/quiz/const/layoutConstants";
 
 import AppProvider from "./provider";
+import { author, createYear, siteTitle } from "@/const/commonConstant";
 
 const inter = Inter({ subsets: ["latin"] });
 

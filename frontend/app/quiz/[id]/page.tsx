@@ -1,5 +1,3 @@
-import Quiz from "@/features/quiz/components/Quiz/Quiz";
-import QuizNav from "@/features/quiz/components/QuizNav/QuizNav";
 import QuizPage from "@/features/quiz/components/QuizPage/QuizPage";
 import { TQuizPageParam } from "@/types/pageParam";
 
