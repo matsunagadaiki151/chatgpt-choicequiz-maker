@@ -1,5 +1,5 @@
+import { TQuiz } from "@/features/quiz/types/QuizType";
 import { atom } from "recoil";
-import { TQuiz } from "../types/QuizType";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
