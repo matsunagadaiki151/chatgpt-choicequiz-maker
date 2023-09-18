@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { TResponse } from "@/types/pageParam";
-import { convertNewLine } from "../hooks/quizUtil";
-import { TQuizData } from "../types/QuizType";
+import { convertNewLine } from "../../quiz/hooks/quizUtil";
+import { TQuizData } from "../../quiz/types/QuizType";
 
 export const getQuizFromSentence = async (
   url: string,

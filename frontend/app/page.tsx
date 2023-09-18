@@ -1,4 +1,4 @@
-import TopField from "@/features/quiz/components/TopField/TopField";
+import TopField from "@/features/topPage/components/TopField/TopField";
 
 export default async function Home() {
   return <TopField />;

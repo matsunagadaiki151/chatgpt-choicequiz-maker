@@ -1,17 +1,17 @@
 "use client";
 
 import useSWR from "swr";
-import { getQuizFromSentence } from "../../api/getQuiz";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { quizListState } from "../../states/quizListState";
-import { quizIsCorrectState } from "../../states/quizIsCorrectState";
 import { useEffect, useState } from "react";
-import { TLoading, TModelName, TQuizData } from "../../types/QuizType";
-import { modelNameState } from "../../states/modelNameState";
-import { isLoadingState } from "../../states/isLoadingState";
-import { selectedOptionsState } from "../../states/selectedOptionsState";
 import { endpoint } from "@/libs/endpoint";
-import { quizNumState } from "../../states/quizNumState";
+import { TLoading, TQuizData } from "@/features/quiz/types/QuizType";
+import { getQuizFromSentence } from "@/features/topPage/api/getQuiz";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
+import { modelNameState } from "@/features/topPage/stores/modelNameState";
+import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
+import { quizListState } from "@/stores/quizListState";
+import { quizNumState } from "@/stores/quizNumState";
+import { selectedOptionsState } from "@/stores/selectedOptionsState";
 
 const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
   const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });
@@ -20,16 +20,17 @@ const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
 
 const TopLoading = ({ sentence }: TLoading) => {
   const [is502Error, setIs502Error] = useState<boolean>(false);
+  const [quizzes, setQuizzes] = useRecoilState(quizListState);
+
+  const quizNum = useRecoilValue(quizNumState);
+  const modelName = useRecoilValue(modelNameState);
+
   const setIsLoading = useSetRecoilState(isLoadingState);
   const setSelectedOptions = useSetRecoilState(selectedOptionsState);
-  const quizNum = useRecoilValue(quizNumState);
 
   useEffect(() => {
     setIs502Error(false);
   }, []);
-
-  const modelName = useRecoilValue(modelNameState);
-  const [quizzes, setQuizzes] = useRecoilState(quizListState);
 
   const { data, error } = useSWR(
     quizzes === undefined
