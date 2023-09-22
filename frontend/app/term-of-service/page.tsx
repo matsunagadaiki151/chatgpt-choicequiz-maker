@@ -14,7 +14,7 @@ export default async function Page() {
         className="prose"
       />
       <div className="my-10">
-        <Link className="text-black" href="/">
+        <Link className="basic-link" href="/">
           トップへ戻る
         </Link>
       </div>

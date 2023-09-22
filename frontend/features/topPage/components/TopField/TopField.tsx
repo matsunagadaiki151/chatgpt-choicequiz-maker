@@ -17,6 +17,7 @@ import SentenceField from "../SentenceField/SentenceField";
 import { quizListState } from "@/stores/quizListState";
 import TopLoading from "../TopLoading/TopLoading";
 import QuizNumInput from "../QuizNumInput/QuizNumInput";
+import Link from "next/link";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -72,9 +73,18 @@ const TopField = () => {
           onSentenceChange={onSentenceChange}
         />
         <QuizNumInput />
-        <Button bgColor="blue" onButtonClick={topButtonClick}>
-          問題を作成する
-        </Button>
+        <div className="flex flex-col items-center space-y-1">
+          <Button bgColor="blue" onButtonClick={topButtonClick}>
+            問題を作成する
+          </Button>
+          <div>
+            「問題を作成する」ボタンをクリックしたことで
+            <Link href="/term-of-service" className="basic-link">
+              利用規約
+            </Link>
+            に同意したとみなします。
+          </div>
+        </div>
         <div>
           <Warning sentence={sentence} selectedModelName={modelName} />
           {!occurError && (
