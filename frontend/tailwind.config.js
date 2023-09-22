@@ -37,5 +37,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [require("@tailwindcss/typography")],
 };
