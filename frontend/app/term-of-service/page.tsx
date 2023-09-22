@@ -1,15 +1,19 @@
-import { client } from "@/libs/cmsSetting";
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import { marked } from "marked";
+
+const postsDirectory = path.join(process.cwd(), "app");
 
 export default async function Page() {
-  const data = await client.get({
-    endpoint: process.env.NEXT_PUBLIC_MICROCMS_TERM ?? "",
-  });
+  const fullPath = path.join(postsDirectory, "public/term-of-service.md");
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const content = marked(fileContents);
   return (
     <div className="h-full flex flex-col items-center">
       <div
         dangerouslySetInnerHTML={{
-          __html: `${data.term}`,
+          __html: `${content}`,
         }}
         className="prose"
       />
