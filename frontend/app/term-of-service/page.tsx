@@ -1,14 +1,8 @@
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import { marked } from "marked";
-
-const postsDirectory = path.join(process.cwd(), "app");
+import { loadMarkDown } from "@/libs/apiLoading";
 
 export default async function Page() {
-  const fullPath = path.join(postsDirectory, "public/term-of-service.md");
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-  const content = marked(fileContents);
+  const content = loadMarkDown("term-of-service.md");
   return (
     <div className="h-full flex flex-col items-center">
       <div
