@@ -13,7 +13,7 @@ export default async function Page() {
         }}
         className="prose"
       />
-      <div className="mx-10">
+      <div className="my-10">
         <Link className="text-black" href="/">
           トップへ戻る
         </Link>
