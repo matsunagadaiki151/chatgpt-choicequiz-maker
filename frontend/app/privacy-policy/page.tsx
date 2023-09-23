@@ -3,7 +3,6 @@ import Link from "next/link";
 
 export default async function Page() {
   const content = loadMarkDown("privacy-policy.md");
-  console.log(content);
   return (
     <div className="h-full flex flex-col items-center">
       <div
