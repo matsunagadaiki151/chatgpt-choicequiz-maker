@@ -1,17 +1,19 @@
-import { client } from "@/libs/cmsSetting";
+import { loadMarkDown } from "@/libs/apiLoading";
 import Link from "next/link";
 
 export default async function Page() {
-  const data = await client.get({
-    endpoint: process.env.NEXT_PUBLIC_MICROCMS_PRIVACY ?? "",
-  });
+  const content = loadMarkDown("privacy-policy.md");
+  console.log(content);
   return (
     <div className="h-full flex flex-col items-center">
       <div
         dangerouslySetInnerHTML={{
-          __html: `${data.privacy}`,
+          __html: `${content.replace(
+            /href/g,
+            "target='_blank' rel='noopener noreferrer' href"
+          )}`,
         }}
-        className="prose"
+        className="prose markdown"
       />
       <div className="my-10">
         <Link className="basic-link" href="/">
