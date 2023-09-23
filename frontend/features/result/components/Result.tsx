@@ -16,6 +16,8 @@ const Result = () => {
         <Link
           href="https://forms.gle/wsuAHaiJV45CTTk1A"
           className="text-base basic-link"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           アンケートに回答する(Google Form)
         </Link>
