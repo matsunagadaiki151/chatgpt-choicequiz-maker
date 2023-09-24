@@ -6,7 +6,8 @@
 現在は、技術系の記事を中心に実験していますが、プロンプトを組み合わせることで、他にも応用できると思います。
 
 ## 機能
-- 入力された文章から4択クイズを作成する(5問作成が可能)
+- 入力された文章から4択クイズを作成する
+- 問題数をしているすることができる。
 - 作成されたクイズをそのまま解くことができる。
 
 ## Usage
@@ -33,12 +34,14 @@ cd chatgpt-choicequiz-maker
 OPENAI_API_KEY={YOUR_OPENAI_API_KEY}
 ```
 
-3. 以下コマンドを実行し、dockerを立ち上げる。
+3. `backend`直下の`.env.sample`を`.env`に変更する(中身はそのままで大丈夫です。)
+
+4. 以下コマンドを実行し、dockerを立ち上げる。
 ```
 docker compose -f "docker-compose.yml" up -d --build
 ```
 
-4.  http://localhost:3002 にアクセスする。
+5.  http://localhost:3002 にアクセスする。
 
 終わったら`docker compose -f "docker-compose.yml" down`で dockerを落とし、`docker system prune`で不要なイメージを削除しておきましょう。
 
@@ -74,14 +77,14 @@ docker compose -f "docker-compose.yml" up -d --build
     - mypy
     - isort
 - LLM
-  - OpenAI (gpt-3.5-turbo)
+  - OpenAI (gpt-3.5-turbo, gpt-3.5-turbo-16k)
 
 ### インフラ
 - Docker
 
 
 ## License
-
+[MIT](https://opensource.org/license/mit/)
 
  
 
