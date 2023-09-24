@@ -1,4 +1,4 @@
-export const siteTitle = "AI Quiz Picker(Beta)";
+export const siteTitle = "AI Mondai Maker";
 export const author = "giranaga";
 export const createYear = 2023;
 
