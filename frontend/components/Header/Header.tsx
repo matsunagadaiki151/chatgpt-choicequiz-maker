@@ -9,7 +9,9 @@ const Header = ({ title }: THeader) => {
   return (
     <header className="w-full bg-giray text-center items-center p-4 mb-10">
       <Link href={"/"}>
-        <div className="font-marugo text-white text-3xl m-auto">{title}</div>
+        <div className="font-marugo text-white text-xl md:text-3xl m-auto">
+          {title}
+        </div>
       </Link>
     </header>
   );

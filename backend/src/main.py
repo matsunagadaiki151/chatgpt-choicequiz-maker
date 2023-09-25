@@ -17,6 +17,7 @@ origins = [
     "http://localhost:3000",
     "http://localhost:3002",
     frontend_endpoint,
+    "https://chatgpt-choicequiz-maker.vercel.app",
 ]
 
 app.add_middleware(

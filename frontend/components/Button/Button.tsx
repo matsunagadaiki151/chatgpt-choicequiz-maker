@@ -13,7 +13,7 @@ const Button = ({ bgColor, onButtonClick, children }: TButton) => {
   return (
     <button
       onClick={onButtonClick}
-      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl py-2 px-6`}
+      className={`${bgColorVariants[bgColor]} text-white font-marugo rounded-xl text-sm md:text-base py-2 px-6 md:py-2 md:px-6`}
     >
       {children}
     </button>
