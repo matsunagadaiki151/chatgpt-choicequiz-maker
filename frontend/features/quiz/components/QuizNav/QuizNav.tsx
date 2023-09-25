@@ -12,10 +12,14 @@ type TQuizNav = {
 function QuizNav({ quizId, isDebug = false }: TQuizNav) {
   const quizNum = useRecoilValue(quizNumState);
   const MIN_QUIZ_NUM = 1;
-  const visiblePreviosLink = isDebug || quizId > MIN_QUIZ_NUM ? "" : "hidden";
-  const visibleFinishLink = isDebug || quizId >= quizNum ? "" : "hidden";
+  const visiblePreviosLink =
+    isDebug || quizId > MIN_QUIZ_NUM ? "" : "hidden md:block md:invisible";
+  const visibleFinishLink =
+    isDebug || quizId >= quizNum ? "" : "hidden md:block md:invisible";
   const visibleNextLink =
-    isDebug || (quizId >= MIN_QUIZ_NUM && quizId < quizNum) ? "" : "hidden";
+    isDebug || (quizId >= MIN_QUIZ_NUM && quizId < quizNum)
+      ? ""
+      : "hidden md:block md:invisible";
   return (
     <div className="font-marugo text-white flex flex-col text-sm md:text-base md:flex-row items-center space-y-4 md:space-y-0 md:items-start md:justify-between">
       <div className={visiblePreviosLink} role="previuos">
