@@ -18,7 +18,7 @@ const QuizPage = ({ id }: TQuizPage) => {
       <div className="flex-1">
         <Quiz id={id} />
       </div>
-      <div className="mx-24 mb-20">
+      <div className="m-2 md:mx-24 md:mb-20">
         <QuizNav quizId={id} />
       </div>
     </div>
