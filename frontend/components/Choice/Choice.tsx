@@ -6,7 +6,10 @@ const Choice = ({ options, selectedOption, onOptionChange }: TChoice) => {
     <div>
       <form>
         {options.map((option, index) => (
-          <div key={index} className="m-2 text-giray font-marugo">
+          <div
+            key={index}
+            className="md:m-2 text-giray font-marugo flex justify-start items-center"
+          >
             <input
               type="radio"
               id={`option${index}`}

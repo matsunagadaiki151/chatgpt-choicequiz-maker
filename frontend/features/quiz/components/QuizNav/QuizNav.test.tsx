@@ -30,9 +30,9 @@ describe("ボタンの配置が正常か", () => {
     const finshLink = screen.getByRole("finish");
     const nextLink = screen.getByRole("next");
     // Check if the previous link is not rendered on the first quiz
-    expect(previousLink).toHaveClass("invisible");
-    expect(finshLink).toHaveClass("invisible");
-    expect(nextLink).not.toHaveClass("invisible");
+    expect(previousLink).toHaveClass("hidden");
+    expect(finshLink).toHaveClass("hidden");
+    expect(nextLink).not.toHaveClass("hidden");
   });
 
   test("中間ページ", () => {
@@ -47,9 +47,9 @@ describe("ボタンの配置が正常か", () => {
     const finshLink = screen.getByRole("finish");
     const nextLink = screen.getByRole("next");
     // Check if the previous link is not rendered on the first quiz
-    expect(previousLink).not.toHaveClass("invisible");
-    expect(finshLink).toHaveClass("invisible");
-    expect(nextLink).not.toHaveClass("invisible");
+    expect(previousLink).not.toHaveClass("hidden");
+    expect(finshLink).toHaveClass("hidden");
+    expect(nextLink).not.toHaveClass("hidden");
   });
 
   test("最後のページ", () => {
@@ -64,9 +64,9 @@ describe("ボタンの配置が正常か", () => {
     const finshLink = screen.getByRole("finish");
     const nextLink = screen.getByRole("next");
     // Check if the previous link is not rendered on the first quiz
-    expect(previousLink).not.toHaveClass("invisible");
-    expect(finshLink).not.toHaveClass("invisible");
-    expect(nextLink).toHaveClass("invisible");
+    expect(previousLink).not.toHaveClass("hidden");
+    expect(finshLink).not.toHaveClass("hidden");
+    expect(nextLink).toHaveClass("hidden");
   });
 });
 
@@ -81,7 +81,7 @@ test("デバッグ時に全部のボタンが表示されるか", () => {
   const finshLink = screen.getByRole("finish");
   const nextLink = screen.getByRole("next");
   // Check if the previous link is not rendered on the first quiz
-  expect(previousLink).not.toHaveClass("invisible");
-  expect(finshLink).not.toHaveClass("invisible");
-  expect(nextLink).not.toHaveClass("invisible");
+  expect(previousLink).not.toHaveClass("hidden");
+  expect(finshLink).not.toHaveClass("hidden");
+  expect(nextLink).not.toHaveClass("hidden");
 });
