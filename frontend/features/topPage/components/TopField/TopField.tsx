@@ -59,8 +59,8 @@ const TopField = () => {
 
   return (
     <>
-      <div className="w-1/2 m-auto flex flex-col space-y-10 items-center">
-        <div className="text-4xl text-bold font-marugo text-giray">
+      <div className="w-3/4 md:w-1/2 m-auto flex flex-col space-y-5 md:space-y-10 items-center">
+        <div className="text-2xl md:text-4xl text-bold font-marugo text-giray">
           問題を作ろう!!
         </div>
         <GPTSelector
@@ -77,12 +77,14 @@ const TopField = () => {
           <Button bgColor="blue" onButtonClick={topButtonClick}>
             問題を作成する
           </Button>
-          <div>
-            「問題を作成する」ボタンをクリックしたことで
-            <Link href="/term-of-service" className="basic-link">
-              利用規約
-            </Link>
-            に同意したとみなします。
+          <div className="text-xs md:text-base flex flex-wrap justify-center">
+            <span>「問題を作成する」ボタンをクリックしたことで</span>
+            <span>
+              <Link href="/term-of-service" className="basic-link">
+                利用規約
+              </Link>
+            </span>
+            <span>に同意したとみなします。</span>
           </div>
         </div>
         <div>
