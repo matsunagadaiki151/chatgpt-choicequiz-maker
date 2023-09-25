@@ -11,3 +11,27 @@
 .markdown a {
   @apply text-blue-500 border-b hover:text-blue-200;
 }
+
+.markdown h1 {
+  @apply text-xl md:text-4xl mb-2 md:mb-8;
+}
+
+.markdown h2 {
+  @apply text-lg md:text-2xl my-2 text-left;
+}
+
+.markdown p {
+  @apply text-sm md:text-base text-left;
+}
+
+.markdown p.date {
+  @apply text-center;
+}
+
+.markdown h3 {
+  @apply text-base md:text-xl text-left;
+}
+
+.markdown li {
+  @apply text-sm md:text-base text-left;
+}

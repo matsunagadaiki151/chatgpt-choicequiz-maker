@@ -4,7 +4,7 @@ import Link from "next/link";
 export default async function Page() {
   const content = loadMarkDown("privacy-policy.md");
   return (
-    <div className="h-full flex flex-col items-center">
+    <div className="h-full flex flex-col text-center mx-10 items-center">
       <div
         dangerouslySetInnerHTML={{
           __html: `${content.replace(
@@ -14,7 +14,7 @@ export default async function Page() {
         }}
         className="prose markdown"
       />
-      <div className="my-10">
+      <div className="my-4 md:my-10 text-sm md:text-base">
         <Link className="basic-link" href="/">
           トップへ戻る
         </Link>
