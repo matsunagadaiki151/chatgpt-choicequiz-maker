@@ -107,7 +107,7 @@ const TopField = () => {
           {occurError && <ErrorMessage />}
         </div>
         {quizzes !== undefined && hasMounted && (
-          <div className="flex flex-col justify-between items-center space-y-4">
+          <div className="flex flex-col justify-between items-center space-y-2 md:space-y-4 text-xs md:text-base">
             <div>クイズの作成が完了しました！！</div>
             <LinkButton bgColor={"blue"} href="/quiz/1" size={"small"}>
               クイズを開始する
