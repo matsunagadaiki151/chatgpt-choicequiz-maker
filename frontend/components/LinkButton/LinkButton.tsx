@@ -20,7 +20,7 @@ const LinkButton = ({
 
   const sizeVariants = {
     small: "py-2 px-4",
-    medium: "py-4 px-6",
+    medium: "py-2 px-3 md:py-4 md:px-6",
     large: "py-6 px-8",
   };
   return (
