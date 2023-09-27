@@ -11,19 +11,6 @@ const Result = () => {
       <div className="text-xl md:text-3xl text-bold font-marugo text-giray">
         正解数 : {correctCount}問
       </div>
-      <div>
-        <p className="text-sm md:text-lg">
-          このアプリに関するアンケートにご協力ください
-        </p>
-        <Link
-          href="https://forms.gle/wsuAHaiJV45CTTk1A"
-          className="text-xs md:text-base basic-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          アンケートに回答する(Google Form)
-        </Link>
-      </div>
     </div>
   );
 };
