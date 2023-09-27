@@ -1,11 +1,15 @@
 import LinkButton from "@/components/LinkButton/LinkButton";
 import Result from "@/features/result/components/Result";
+import Link from "next/link";
 
 export default async function Page() {
   return (
     <div className="h-full flex flex-col items-center">
-      <div className="text-3xl text-center font-marugo text-giray flex-1">
+      <div className="text-center font-marugo text-giray flex-1 flex flex-col items-center space-y-4">
         <Result />
+        <Link href="/result/detail" className="basic-link">
+          詳細を見る
+        </Link>
       </div>
       <div className="mb-20">
         <LinkButton bgColor="blue" size="medium" href="/">
