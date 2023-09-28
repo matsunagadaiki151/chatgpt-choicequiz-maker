@@ -1,22 +1,22 @@
 "use client";
 
 import Button from "@/components/Button/Button";
-import SentenceField from "@/components/SententceField/SentenceField";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
-import TopLoading from "../TopLoading/TopLoading";
 import Loading from "@/components/Loading/Loading";
 import { useRecoilState } from "recoil";
-import { modelNameState } from "../../states/modelNameState";
-import RadioTab from "@/components/RadioTab/RadioTab";
-import { TModelName } from "../../types/QuizType";
 import Warning from "../Warning/Warning";
 import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
-import { quizListState } from "../../states/quizListState";
-import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
-import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
+import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
+import { modelNameState } from "@/features/topPage/stores/modelNameState";
+import { TModelName } from "@/features/quiz/types/QuizType";
+import GPTSelector from "../GPTSelector/GPTSelector";
+import SentenceField from "../SentenceField/SentenceField";
+import { quizListState } from "@/stores/quizListState";
+import TopLoading from "../TopLoading/TopLoading";
+import QuizNumInput from "../QuizNumInput/QuizNumInput";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
@@ -27,11 +27,10 @@ const TopField = () => {
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
   const [occurError, setOccurError] = useState<boolean>(false);
 
-  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K", "GPT4"];
+  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
   const modelDict: { [name: string]: TModelName } = {
     "GPT3.5Turbo": "gpt-3.5-turbo",
     "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
-    GPT4: "gpt-4",
   };
 
   useEffect(() => {
@@ -63,7 +62,7 @@ const TopField = () => {
         <div className="text-4xl text-bold font-marugo text-giray">
           問題を作ろう!!
         </div>
-        <RadioTab
+        <GPTSelector
           options={options}
           selectedOption={selectedOption}
           onOptionChange={onModelOptionChange}

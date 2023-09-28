@@ -1,4 +1,4 @@
-import { TQuiz } from "../types/QuizType";
+import { TQuiz } from "@/features/quiz/types/QuizType";
 
 export const judgeCorrect = (choiceSentents: string, quiz: TQuiz) => {
   const matchedChoice = quiz.choice.find(

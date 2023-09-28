@@ -36,9 +36,3 @@ export type TFooter = {
   author: string;
   createYear: number;
 };
-
-export type TRadioTab = {
-  options: string[];
-  selectedOption: string;
-  onOptionChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};

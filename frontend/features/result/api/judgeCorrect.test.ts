@@ -1,5 +1,5 @@
 import { judgeCorrect } from "./judgeCorrect";
-import { TQuiz } from "../types/QuizType";
+import { TQuiz } from "../../quiz/types/QuizType";
 
 describe("judgeCorrect関数", () => {
   const sampleQuiz: TQuiz = {

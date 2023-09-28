@@ -13,6 +13,7 @@ describe("RadioTab", () => {
         options={options}
         selectedOption={selectedOption}
         onOptionChange={onOptionChange}
+        isLoading={true}
       />
     );
 

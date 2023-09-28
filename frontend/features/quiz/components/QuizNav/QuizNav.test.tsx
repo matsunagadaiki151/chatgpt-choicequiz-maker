@@ -4,9 +4,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import QuizNav from "./QuizNav";
 import "@testing-library/jest-dom";
+import { RecoilRoot } from "recoil";
 
 test("QuizNav component renders correctly", () => {
-  render(<QuizNav quizId={1} maxQuizNum={5} isDebug={false} />);
+  render(
+    <RecoilRoot>
+      <QuizNav quizId={1} isDebug={false} />
+    </RecoilRoot>
+  );
   // Check if the links are rendered correctly based on the provided props
   expect(screen.getByText("← 前の問題へ")).toBeInTheDocument();
   expect(screen.getByText("問題を終了する")).toBeInTheDocument();
@@ -15,7 +20,11 @@ test("QuizNav component renders correctly", () => {
 
 describe("ボタンの配置が正常か", () => {
   test("最初のページ", () => {
-    render(<QuizNav quizId={1} maxQuizNum={5} isDebug={false} />);
+    render(
+      <RecoilRoot>
+        <QuizNav quizId={1} isDebug={false} />
+      </RecoilRoot>
+    );
 
     const previousLink = screen.queryByRole("previuos");
     const finshLink = screen.getByRole("finish");
@@ -27,7 +36,11 @@ describe("ボタンの配置が正常か", () => {
   });
 
   test("中間ページ", () => {
-    render(<QuizNav quizId={2} maxQuizNum={5} isDebug={false} />);
+    render(
+      <RecoilRoot>
+        <QuizNav quizId={2} isDebug={false} />
+      </RecoilRoot>
+    );
 
     // Check if the next link is not rendered on the last quiz
     const previousLink = screen.queryByRole("previuos");
@@ -40,7 +53,11 @@ describe("ボタンの配置が正常か", () => {
   });
 
   test("最後のページ", () => {
-    render(<QuizNav quizId={5} maxQuizNum={5} isDebug={false} />);
+    render(
+      <RecoilRoot>
+        <QuizNav quizId={5} isDebug={false} />
+      </RecoilRoot>
+    );
 
     // Check if the next link is not rendered on the last quiz
     const previousLink = screen.queryByRole("previuos");
@@ -54,7 +71,11 @@ describe("ボタンの配置が正常か", () => {
 });
 
 test("デバッグ時に全部のボタンが表示されるか", () => {
-  render(<QuizNav quizId={3} maxQuizNum={5} isDebug={true} />);
+  render(
+    <RecoilRoot>
+      <QuizNav quizId={3} isDebug={true} />
+    </RecoilRoot>
+  );
 
   const previousLink = screen.queryByRole("previuos");
   const finshLink = screen.getByRole("finish");
