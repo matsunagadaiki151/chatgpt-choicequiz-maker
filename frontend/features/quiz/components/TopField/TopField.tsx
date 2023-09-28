@@ -16,7 +16,6 @@ import LinkButton from "@/components/LinkButton/LinkButton";
 import { quizListState } from "../../states/quizListState";
 import { isLoadingState } from "../../states/isLoadingState";
 import ErrorMessage from "../TopLoading/ErrorMessage";
-import { quizNumState } from "../../states/quizNumState";
 import QuizNumInput from "@/components/QuizNumInput/QuizNumInput";
 
 const TopField = () => {
@@ -28,10 +27,11 @@ const TopField = () => {
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
   const [occurError, setOccurError] = useState<boolean>(false);
 
-  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K"];
+  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K", "GPT4"];
   const modelDict: { [name: string]: TModelName } = {
     "GPT3.5Turbo": "gpt-3.5-turbo",
     "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
+    GPT4: "gpt-4",
   };
 
   useEffect(() => {
