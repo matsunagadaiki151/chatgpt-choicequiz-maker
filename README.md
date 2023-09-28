@@ -33,12 +33,14 @@ cd chatgpt-choicequiz-maker
 OPENAI_API_KEY={YOUR_OPENAI_API_KEY}
 ```
 
-3. 以下コマンドを実行し、dockerを立ち上げる。
+3. `frontend`直下の`.env.sample`を`.env`に変更する。(中身の編集は不要です。)
+
+4. 以下コマンドを実行し、dockerを立ち上げる。
 ```
 docker compose -f "docker-compose.yml" up -d --build
 ```
 
-4.  http://localhost:3002 にアクセスする。
+5.  http://localhost:3002 にアクセスする。
 
 終わったら`docker compose -f "docker-compose.yml" down`で dockerを落とし、`docker system prune`で不要なイメージを削除しておきましょう。
 
