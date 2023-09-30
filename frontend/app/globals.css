@@ -8,6 +8,12 @@
   }
 }
 
+@layer components {
+  .basic-link {
+    @apply text-blue-500 border-b hover:text-blue-200;
+  }
+}
+
 .markdown a {
   @apply text-blue-500 border-b hover:text-blue-200;
 }
