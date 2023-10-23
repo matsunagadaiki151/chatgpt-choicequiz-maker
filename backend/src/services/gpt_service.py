@@ -19,8 +19,8 @@ class GPTService:
         self.recommend_length = recommend_length
         self.text = text
         self.quiz_num = quiz_num
-        self.system_prompt = f"""以下の説明文から日本語の文章の4択クイズを{quiz_num}問作成し特定のフォーマットで出力してください。
-        誤った選択肢は存在しない単語や、反対の意味を持つ文章等明らかに間違ったものになるようにしてください。"""  # noqa
+        self.system_prompt = f"""以下の文字列から重要な情報を{quiz_num}つ抽出し、日本語の文章の4択クイズを{quiz_num}問作成してください。
+        4択中3つは間違った答えや説明文になるようにしてください。間違いのバリエーションは充実させてください。"""  # noqa
 
     @staticmethod
     def from_model_name(text, model_name, quiz_num):
