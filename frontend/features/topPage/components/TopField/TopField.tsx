@@ -10,31 +10,24 @@ import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import ErrorMessage from "../TopLoading/ErrorMessage";
 import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
-import { modelNameState } from "@/features/topPage/stores/modelNameState";
-import { TModelName } from "@/features/quiz/types/QuizType";
-import GPTSelector from "../GPTSelector/GPTSelector";
 import SentenceField from "../SentenceField/SentenceField";
 import { quizListState } from "@/stores/quizListState";
 import TopLoading from "../TopLoading/TopLoading";
 import QuizNumInput from "../QuizNumInput/QuizNumInput";
+import { TModelName } from "@/features/quiz/types/QuizType";
+
+// 現状はgpt-4o-miniで固定なので一旦定数として定義
+export const SELECTED_MODEL: TModelName = "gpt-4o-mini";
 
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const [sentence, SetSentence] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<string>("GPT3.5Turbo");
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
-  const [modelName, setModelName] = useRecoilState(modelNameState);
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
   const [occurError, setOccurError] = useState<boolean>(false);
 
-  const options = ["GPT4oMini"];
-  const modelDict: { [name: string]: TModelName } = {
-    GPT4oMini: "gpt-4o-mini",
-  };
-
   useEffect(() => {
     setHasMounted(true);
-    setModelName("gpt-4o-mini");
     setQuizzes(undefined);
   }, []);
 
@@ -49,23 +42,12 @@ const TopField = () => {
     setIsLoading(false);
   };
 
-  const onModelOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    var value = e.target.value;
-    setSelectedOption(value);
-    setModelName(modelDict[e.target.value]);
-  };
-
   return (
     <>
       <div className="w-1/2 m-auto flex flex-col space-y-10 items-center">
         <div className="text-4xl text-bold font-marugo text-giray">
           問題を作ろう!!
         </div>
-        <GPTSelector
-          options={options}
-          selectedOption={selectedOption}
-          onOptionChange={onModelOptionChange}
-        />
         <SentenceField
           sentence={sentence}
           onSentenceChange={onSentenceChange}
@@ -75,7 +57,7 @@ const TopField = () => {
           問題を作成する
         </Button>
         <div>
-          <Warning sentence={sentence} selectedModelName={modelName} />
+          <Warning sentence={sentence} />
           {!occurError && (
             <ErrorBoundary
               FallbackComponent={ErrorFallback}

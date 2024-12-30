@@ -10,7 +10,7 @@ export const getQuizFromSentence = async (
   const convertedSentence = convertNewLine(sentence);
   const headData = {
     text: convertedSentence,
-    model_name: modelName.toString(),
+    model_name: modelName,
     quiz_num: quizNum,
   };
 

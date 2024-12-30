@@ -20,13 +20,8 @@ export type TLoading = {
 
 export type TModelName = "gpt-4o-mini";
 
-export type TWarning = {
-  sentence: string;
-  selectedModelName: TModelName;
-};
-
 export type TQuizData = {
   sentence: string;
-  modelName: TModelName;
+  modelName: string;
   quizNum: number;
 };

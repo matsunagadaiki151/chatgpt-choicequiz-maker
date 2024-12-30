@@ -1,5 +1,4 @@
-// 現状はgpt-4o-miniで固定なので一旦定数として定義
-const SELECTED_MODEL = "gpt-4o-mini";
+import { SELECTED_MODEL } from "../TopField/TopField";
 
 export type TWarning = {
   sentence: string;

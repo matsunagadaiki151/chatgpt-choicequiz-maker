@@ -7,11 +7,11 @@ import { endpoint } from "@/libs/endpoint";
 import { TLoading, TQuizData } from "@/features/quiz/types/QuizType";
 import { getQuizFromSentence } from "@/features/topPage/api/getQuiz";
 import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
-import { modelNameState } from "@/features/topPage/stores/modelNameState";
 import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
 import { quizListState } from "@/stores/quizListState";
 import { quizNumState } from "@/stores/quizNumState";
 import { selectedOptionsState } from "@/stores/selectedOptionsState";
+import { SELECTED_MODEL } from "../TopField/TopField";
 
 const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
   const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });
@@ -23,8 +23,6 @@ const TopLoading = ({ sentence }: TLoading) => {
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
 
   const quizNum = useRecoilValue(quizNumState);
-  const modelName = useRecoilValue(modelNameState);
-
   const setIsLoading = useSetRecoilState(isLoadingState);
   const setSelectedOptions = useSetRecoilState(selectedOptionsState);
 
@@ -34,10 +32,10 @@ const TopLoading = ({ sentence }: TLoading) => {
 
   const { data, error } = useSWR(
     quizzes === undefined
-      ? [`${endpoint}/create`, sentence, modelName, quizNum]
+      ? [`${endpoint}/create`, sentence, SELECTED_MODEL, quizNum]
       : null,
-    ([url, sentence, modelName]) =>
-      fetcher(url, { sentence, modelName, quizNum }),
+    ([url, sentence, SELECTED_MODEL]) =>
+      fetcher(url, { sentence, modelName: SELECTED_MODEL, quizNum }),
     { suspense: true }
   );
 
