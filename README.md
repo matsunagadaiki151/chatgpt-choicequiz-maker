@@ -61,6 +61,7 @@ docker compose -f "docker-compose.yml" up -d --build
   - React Testing Library
 - 状態管理
     - Recoil
+        - [TODO] メンテナンスされていないので修正する!!
     - SWR
 
 ### バックエンド
@@ -70,16 +71,14 @@ docker compose -f "docker-compose.yml" up -d --build
   - FastAPI
   - LangChain
 - 開発環境
-  - Poetry
+  - Poetry(可能ならuvに変えたい)
+    - (可能ならRuffに変えたい)
     - Flake8
     - Black
     - mypy
     - isort
 - LLM
-  - OpenAI (gpt-3.5-turbo)
-
-### インフラ
-- Docker
+  - OpenAI (gpt-4o-mini)
 
 
 ## License
