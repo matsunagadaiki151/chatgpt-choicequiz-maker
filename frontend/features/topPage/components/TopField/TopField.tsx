@@ -27,16 +27,14 @@ const TopField = () => {
   const [quizzes, setQuizzes] = useRecoilState(quizListState);
   const [occurError, setOccurError] = useState<boolean>(false);
 
-  const options = ["GPT3.5Turbo", "GPT3.5Turbo16K", "GPT4"];
+  const options = ["GPT4oMini"];
   const modelDict: { [name: string]: TModelName } = {
-    "GPT3.5Turbo": "gpt-3.5-turbo",
-    "GPT3.5Turbo16K": "gpt-3.5-turbo-16k",
-    GPT4: "gpt-4",
+    GPT4oMini: "gpt-4o-mini",
   };
 
   useEffect(() => {
     setHasMounted(true);
-    setModelName("gpt-3.5-turbo");
+    setModelName("gpt-4o-mini");
     setQuizzes(undefined);
   }, []);
 

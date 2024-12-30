@@ -18,7 +18,7 @@ export type TLoading = {
   sentence: string;
 };
 
-export type TModelName = "gpt-3.5-turbo" | "gpt-3.5-turbo-16k" | "gpt-4";
+export type TModelName = "gpt-4o-mini";
 
 export type TWarning = {
   sentence: string;
