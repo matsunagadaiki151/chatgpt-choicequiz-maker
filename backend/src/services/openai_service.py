@@ -1,6 +1,6 @@
 from services.gpt_service import GPTService
 
-model_names = ["gpt-3.5-turbo", "gpt-3.5-turbo-16k", "gpt-4"]
+model_names = ["gpt-4o-mini"]
 max_quiz_num = 5
 
 
