@@ -1,23 +1,25 @@
 "use client";
 
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { TChoiceContent, TQuizProps, TQuiz } from "../../types/QuizType";
-import { quizIsCorrectState } from "../../../../stores/quizIsCorrectState";
+import { TQuizProps, TQuiz } from "../../types/QuizType";
+import { useQuizIsCorrectStore } from "../../../../stores/quizIsCorrectState";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 import { useRouter } from "next/navigation";
 import { judgeCorrect } from "@/features/result/api/judgeCorrect";
-import { quizListState } from "@/stores/quizListState";
-import { selectedOptionsState } from "@/stores/selectedOptionsState";
+import { useQuizListStore } from "@/stores/quizListState";
+import { useSelectedOptionsStore } from "@/stores/selectedOptionsState";
+import { useShallow } from "zustand/shallow";
 
 const Quiz = ({ id }: TQuizProps) => {
   const router = useRouter();
-  const quizList = useRecoilValue(quizListState);
-  const [selectedOptions, setSelectedOptions] =
-    useRecoilState(selectedOptionsState);
-  const [quizIsCorrects, setQuizIsCorrects] =
-    useRecoilState(quizIsCorrectState);
+  const quizList = useQuizListStore((state) => state.quizList);
+  const [selectedOptions, setSelectedOptions] = useSelectedOptionsStore(
+    useShallow((state) => [state.selectedOptions, state.setSelectedOptions])
+  );
+  const [quizIsCorrects, setQuizIsCorrects] = useQuizIsCorrectStore(
+    useShallow((state) => [state.quizIsCorrects, state.setQuizIsCorrects])
+  );
 
   if (quizList === undefined || selectedOptions === undefined) {
     router.push("/");
@@ -32,6 +34,8 @@ const Quiz = ({ id }: TQuizProps) => {
     newSelectedOptions[id - 1] = option;
     setSelectedOptions(newSelectedOptions);
   };
+
+  console.log(quizIsCorrects);
 
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
 

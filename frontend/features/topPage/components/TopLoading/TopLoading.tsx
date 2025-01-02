@@ -1,17 +1,17 @@
 "use client";
 
 import useSWR from "swr";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { endpoint } from "@/libs/endpoint";
 import { TLoading, TQuizData } from "@/features/quiz/types/QuizType";
 import { getQuizFromSentence } from "@/features/topPage/api/getQuiz";
-import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
-import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
-import { quizListState } from "@/stores/quizListState";
-import { quizNumState } from "@/stores/quizNumState";
-import { selectedOptionsState } from "@/stores/selectedOptionsState";
+import { useIsLoadingStore } from "@/features/topPage/stores/isLoadingState";
+import { useQuizListStore } from "@/stores/quizListState";
+import { useQuizNumStore } from "@/stores/quizNumState";
+import { useSelectedOptionsStore } from "@/stores/selectedOptionsState";
 import { SELECTED_MODEL } from "../TopField/TopField";
+import { useShallow } from "zustand/shallow";
+import { useQuizIsCorrectStore } from "@/stores/quizIsCorrectState";
 
 const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
   const quizzes = getQuizFromSentence(url, { sentence, modelName, quizNum });
@@ -20,12 +20,15 @@ const fetcher = (url: string, { sentence, modelName, quizNum }: TQuizData) => {
 
 const TopLoading = ({ sentence }: TLoading) => {
   const [is502Error, setIs502Error] = useState<boolean>(false);
-  const [quizzes, setQuizzes] = useRecoilState(quizListState);
+  const [quizzes, setQuizzes] = useQuizListStore(
+    useShallow((state) => [state.quizList, state.setQuizList])
+  );
 
-  const quizNum = useRecoilValue(quizNumState);
-  const setIsLoading = useSetRecoilState(isLoadingState);
-  const setSelectedOptions = useSetRecoilState(selectedOptionsState);
-
+  const quizNum = useQuizNumStore((state) => state.quizNum);
+  const setIsLoading = useIsLoadingStore((state) => state.setIsLoading);
+  const setSelectedOptions = useSelectedOptionsStore(
+    useShallow((state) => state.setSelectedOptions)
+  );
   useEffect(() => {
     setIs502Error(false);
   }, []);
@@ -43,8 +46,9 @@ const TopLoading = ({ sentence }: TLoading) => {
     console.log("エラー発生");
     setIs502Error(true);
   }
-  const setQuizIsCorrects = useSetRecoilState(quizIsCorrectState);
-
+  const setQuizIsCorrects = useQuizIsCorrectStore(
+    (state) => state.setQuizIsCorrects
+  );
   useEffect(() => {
     if (data !== undefined) {
       setQuizzes(data);

@@ -1,10 +1,23 @@
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const { persistAtom } = recoilPersist();
+type State = {
+  selectedOptions: string[] | undefined;
+};
 
-export const selectedOptionsState = atom<string[] | undefined>({
-  key: "selectedOptionsState",
-  default: undefined,
-  effects_UNSTABLE: [persistAtom],
-});
+type Action = {
+  setSelectedOptions: (selectedOptions: string[] | undefined) => void;
+};
+
+export const useSelectedOptionsStore = create<State & Action>()(
+  persist(
+    (set) => ({
+      selectedOptions: undefined,
+      setSelectedOptions: (selectedOptions) =>
+        set((state) => ({ ...state, selectedOptions })),
+    }),
+    {
+      name: "selectedOptions-storage",
+    }
+  )
+);

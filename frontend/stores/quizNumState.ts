@@ -1,10 +1,22 @@
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const { persistAtom } = recoilPersist();
+type State = {
+  quizNum: number;
+};
 
-export const quizNumState = atom<number>({
-  key: "quizNumState",
-  default: 5,
-  effects_UNSTABLE: [persistAtom],
-});
+type Action = {
+  setQuizNum: (quizNum: number) => void;
+};
+
+export const useQuizNumStore = create<State & Action>()(
+  persist(
+    (set) => ({
+      quizNum: 5,
+      setQuizNum: (quizNum) => set((state) => ({ ...state, quizNum })),
+    }),
+    {
+      name: "quizNum-storage",
+    }
+  )
+);

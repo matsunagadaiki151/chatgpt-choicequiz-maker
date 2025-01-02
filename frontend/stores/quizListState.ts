@@ -1,11 +1,23 @@
 import { TQuiz } from "@/features/quiz/types/QuizType";
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const { persistAtom } = recoilPersist();
+type State = {
+  quizList: TQuiz[] | undefined;
+};
 
-export const quizListState = atom<TQuiz[] | undefined>({
-  key: "quizListState",
-  default: undefined,
-  effects_UNSTABLE: [persistAtom],
-});
+type Action = {
+  setQuizList: (quizList: TQuiz[] | undefined) => void;
+};
+
+export const useQuizListStore = create<State & Action>()(
+  persist(
+    (set) => ({
+      quizList: undefined,
+      setQuizList: (quizList) => set((state) => ({ ...state, quizList })),
+    }),
+    {
+      name: "quizList-storage",
+    }
+  )
+);

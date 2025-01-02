@@ -1,6 +1,14 @@
-import { atom } from "recoil";
+import { create } from "zustand";
 
-export const isLoadingState = atom<boolean>({
-  key: "isLoadingState",
-  default: false,
-});
+type State = {
+  isLoading: boolean;
+};
+
+type Action = {
+  setIsLoading: (after: boolean) => void;
+};
+
+export const useIsLoadingStore = create<State & Action>()((set) => ({
+  isLoading: false,
+  setIsLoading: (after) => set((state) => ({ ...state, isLoading: after })),
+}));

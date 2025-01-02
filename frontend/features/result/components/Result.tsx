@@ -1,10 +1,9 @@
 "use client";
 
-import { useRecoilValue } from "recoil";
-import { quizIsCorrectSelector } from "../../../stores/quizIsCorrectState";
+import { useQuizIsCorrectStore } from "../../../stores/quizIsCorrectState";
 
 const Result = () => {
-  const correctCount = useRecoilValue(quizIsCorrectSelector);
+  const correctCount = useQuizIsCorrectStore((state) => state.correctCount);
   return (
     <div className="text-3xl text-bold font-marugo text-giray">
       正解数 : {correctCount}問
