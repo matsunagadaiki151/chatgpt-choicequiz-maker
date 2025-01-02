@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.6.10",
     "@types/node": "22.10.3",
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
