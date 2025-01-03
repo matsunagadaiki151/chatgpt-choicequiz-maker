@@ -35,8 +35,6 @@ const Quiz = ({ id }: TQuizProps) => {
     setSelectedOptions(newSelectedOptions);
   };
 
-  console.log(quizIsCorrects);
-
   const choiceSentents = quiz.choice.map((c) => c.choice_sentence);
 
   // handler
