@@ -1,11 +1,7 @@
 import { TQuiz } from "@/features/quiz/types/QuizType";
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { atomWithStorage } from "jotai/utils";
 
-const { persistAtom } = recoilPersist();
-
-export const quizListState = atom<TQuiz[] | undefined>({
-  key: "quizListState",
-  default: undefined,
-  effects_UNSTABLE: [persistAtom],
-});
+export const quizListAtom = atomWithStorage<TQuiz[] | undefined>(
+  "quizList-storage",
+  undefined
+);

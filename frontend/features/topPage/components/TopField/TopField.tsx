@@ -3,18 +3,18 @@
 import Button from "@/components/Button/Button";
 import { ChangeEvent, Suspense, useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
-import { useRecoilState } from "recoil";
 import Warning from "../Warning/Warning";
 import { ErrorFallback } from "../TopLoading/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import LinkButton from "@/components/LinkButton/LinkButton";
 import ErrorMessage from "../TopLoading/ErrorMessage";
-import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
+import { isLoadingAtom } from "@/features/topPage/stores/isLoadingState";
 import SentenceField from "../SentenceField/SentenceField";
-import { quizListState } from "@/stores/quizListState";
+import { quizListAtom } from "@/stores/quizListState";
 import TopLoading from "../TopLoading/TopLoading";
 import QuizNumInput from "../QuizNumInput/QuizNumInput";
 import { TModelName } from "@/features/quiz/types/QuizType";
+import { useAtom } from "jotai";
 
 // 現状はgpt-4o-miniで固定なので一旦定数として定義
 export const SELECTED_MODEL: TModelName = "gpt-4o-mini";
@@ -22,8 +22,8 @@ export const SELECTED_MODEL: TModelName = "gpt-4o-mini";
 const TopField = () => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const [sentence, SetSentence] = useState<string>("");
-  const [isLoading, setIsLoading] = useRecoilState<boolean>(isLoadingState);
-  const [quizzes, setQuizzes] = useRecoilState(quizListState);
+  const [isLoading, setIsLoading] = useAtom(isLoadingAtom);
+  const [quizzes, setQuizzes] = useAtom(quizListAtom);
   const [occurError, setOccurError] = useState<boolean>(false);
 
   useEffect(() => {

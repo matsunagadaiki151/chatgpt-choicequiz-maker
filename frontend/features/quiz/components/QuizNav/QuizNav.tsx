@@ -1,8 +1,8 @@
 "use client";
 
 import LinkButton from "@/components/LinkButton/LinkButton";
-import { quizNumState } from "@/stores/quizNumState";
-import { useRecoilValue } from "recoil";
+import { quizNumAtom } from "@/stores/quizNumState";
+import { useAtom } from "jotai";
 
 type TQuizNav = {
   quizId: number;
@@ -10,7 +10,7 @@ type TQuizNav = {
 };
 
 function QuizNav({ quizId, isDebug = false }: TQuizNav) {
-  const quizNum = useRecoilValue(quizNumState);
+  const [quizNum] = useAtom(quizNumAtom);
   const MIN_QUIZ_NUM = 1;
   const visiblePreviosLink =
     isDebug || quizId > MIN_QUIZ_NUM ? "" : "invisible";

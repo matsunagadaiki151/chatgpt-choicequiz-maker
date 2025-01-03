@@ -1,15 +1,14 @@
 "use client";
 
 import TextArea, { TTextArea } from "@/components/TextArea/TextArea";
-import { isLoadingState } from "@/features/topPage/stores/isLoadingState";
-import { TQuestion } from "@/types/componentTypes";
-import React, { ChangeEvent, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { isLoadingAtom } from "@/features/topPage/stores/isLoadingState";
+import React from "react";
+import { useAtom } from "jotai";
 
 type TSentenceField = Pick<TTextArea, "sentence" | "onSentenceChange">;
 
 const SentenceField = ({ sentence, onSentenceChange }: TSentenceField) => {
-  const isLoading = useRecoilValue(isLoadingState);
+  const [isLoading, _] = useAtom(isLoadingAtom);
   return (
     <TextArea
       sentence={sentence}

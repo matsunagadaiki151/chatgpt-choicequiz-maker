@@ -1,10 +1,3 @@
-import { atom } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { atomWithStorage } from "jotai/utils";
 
-const { persistAtom } = recoilPersist();
-
-export const quizNumState = atom<number>({
-  key: "quizNumState",
-  default: 5,
-  effects_UNSTABLE: [persistAtom],
-});
+export const quizNumAtom = atomWithStorage<number>("quizNum-storage", 5);
