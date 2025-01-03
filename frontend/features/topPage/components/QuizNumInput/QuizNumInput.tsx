@@ -1,11 +1,11 @@
 import NumSelector from "@/components/NumSelector/NumSelector";
 import { MAX_QUIZ_NUM } from "@/const/commonConstant";
-import { quizNumState } from "@/stores/quizNumState";
+import { quizNumAtom } from "@/stores/quizNumState";
+import { useAtom } from "jotai";
 import { ChangeEvent } from "react";
-import { useRecoilState } from "recoil";
 
 const QuizNumInput = () => {
-  const [quizNum, setQuizNum] = useRecoilState(quizNumState);
+  const [quizNum, setQuizNum] = useAtom(quizNumAtom);
   const numChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newQuizNum = parseInt(e.target.value);
     setQuizNum(newQuizNum);

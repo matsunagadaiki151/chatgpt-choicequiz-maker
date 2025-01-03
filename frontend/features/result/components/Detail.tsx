@@ -1,14 +1,14 @@
 "use client";
 
-import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
-import { quizListState } from "@/stores/quizListState";
-import { selectedOptionsState } from "@/stores/selectedOptionsState";
-import { useRecoilValue } from "recoil";
+import { quizIsCorrectAtom } from "@/stores/quizIsCorrectState";
+import { quizListAtom } from "@/stores/quizListState";
+import { selectedOptionsAtom } from "@/stores/selectedOptionsState";
+import { useAtom } from "jotai";
 
 const Detail = () => {
-  const quizzes = useRecoilValue(quizListState);
-  const selectedOptions = useRecoilValue(selectedOptionsState);
-  const isCorrects = useRecoilValue(quizIsCorrectState);
+  const [quizzes] = useAtom(quizListAtom);
+  const [selectedOptions] = useAtom(selectedOptionsAtom);
+  const [isCorrects] = useAtom(quizIsCorrectAtom);
   const answerSentences = quizzes?.map(
     (quiz) => quiz.choice[quiz.answer_id - 1].choice_sentence
   );

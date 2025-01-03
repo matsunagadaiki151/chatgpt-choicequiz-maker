@@ -1,23 +1,21 @@
 "use client";
 
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { TChoiceContent, TQuizProps, TQuiz } from "../../types/QuizType";
-import { quizIsCorrectState } from "../../../../stores/quizIsCorrectState";
+import { TQuizProps, TQuiz } from "../../types/QuizType";
+import { quizIsCorrectAtom } from "../../../../stores/quizIsCorrectState";
 import Question from "@/components/Question/Question";
 import Choice from "@/components/Choice/Choice";
 import { useRouter } from "next/navigation";
 import { judgeCorrect } from "@/features/result/api/judgeCorrect";
-import { quizListState } from "@/stores/quizListState";
-import { selectedOptionsState } from "@/stores/selectedOptionsState";
+import { quizListAtom } from "@/stores/quizListState";
+import { selectedOptionsAtom } from "@/stores/selectedOptionsState";
+import { useAtom } from "jotai";
 
 const Quiz = ({ id }: TQuizProps) => {
   const router = useRouter();
-  const quizList = useRecoilValue(quizListState);
-  const [selectedOptions, setSelectedOptions] =
-    useRecoilState(selectedOptionsState);
-  const [quizIsCorrects, setQuizIsCorrects] =
-    useRecoilState(quizIsCorrectState);
+  const [quizList] = useAtom(quizListAtom);
+  const [selectedOptions, setSelectedOptions] = useAtom(selectedOptionsAtom);
+  const [quizIsCorrects, setQuizIsCorrects] = useAtom(quizIsCorrectAtom);
 
   if (quizList === undefined || selectedOptions === undefined) {
     router.push("/");

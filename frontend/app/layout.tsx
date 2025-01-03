@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 
-import AppProvider from "./provider";
 import { author, createYear, siteTitle } from "@/const/commonConstant";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,9 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} flex flex-col w-screen h-screen`}>
         <Header title={siteTitle} />
-        <div className="flex-1">
-          <AppProvider>{children}</AppProvider>
-        </div>
+        <div className="flex-1">{children}</div>
         <Footer author={author} createYear={createYear} />
       </body>
     </html>
