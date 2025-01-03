@@ -1,14 +1,16 @@
 "use client";
 
-import { quizIsCorrectState } from "@/stores/quizIsCorrectState";
-import { quizListState } from "@/stores/quizListState";
-import { selectedOptionsState } from "@/stores/selectedOptionsState";
-import { useRecoilValue } from "recoil";
+import { useQuizIsCorrectStore } from "@/stores/quizIsCorrectState";
+import { useQuizListStore } from "@/stores/quizListState";
+import { useSelectedOptionsStore } from "@/stores/selectedOptionsState";
+import { useShallow } from "zustand/shallow";
 
 const Detail = () => {
-  const quizzes = useRecoilValue(quizListState);
-  const selectedOptions = useRecoilValue(selectedOptionsState);
-  const isCorrects = useRecoilValue(quizIsCorrectState);
+  const quizzes = useQuizListStore(useShallow((state) => state.quizList));
+  const selectedOptions = useSelectedOptionsStore(
+    useShallow((state) => state.selectedOptions)
+  );
+  const isCorrects = useQuizIsCorrectStore((state) => state.quizIsCorrects);
   const answerSentences = quizzes?.map(
     (quiz) => quiz.choice[quiz.answer_id - 1].choice_sentence
   );

@@ -1,15 +1,14 @@
 "use client";
-import { useRecoilValue } from "recoil";
 import Quiz from "../Quiz/Quiz";
 import QuizNav from "../QuizNav/QuizNav";
-import { quizNumState } from "@/stores/quizNumState";
+import { useQuizNumStore } from "@/stores/quizNumState";
 
 type TQuizPage = {
   id: number;
 };
 
 const QuizPage = ({ id }: TQuizPage) => {
-  const quizNum = useRecoilValue(quizNumState);
+  const quizNum = useQuizNumStore((state) => state.quizNum);
   if (id > quizNum) {
     return <div>Not Found</div>;
   }

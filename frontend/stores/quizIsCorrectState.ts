@@ -1,19 +1,29 @@
-import { atom, selector } from "recoil";
-import { recoilPersist } from "recoil-persist";
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
 
-const { persistAtom } = recoilPersist();
+type State = {
+  quizIsCorrects: boolean[];
+};
 
-export const quizIsCorrectState = atom<boolean[]>({
-  key: "quizIsCorrectState",
-  default: [],
-  effects_UNSTABLE: [persistAtom],
-});
+type Action = {
+  setQuizIsCorrects: (quizIsCorrect: boolean[]) => void;
+};
 
-export const quizIsCorrectSelector = selector<number>({
-  key: "quizIsCorrectSelector",
-  get: ({ get }) => {
-    const quizIsCorrects = get(quizIsCorrectState);
-    return quizIsCorrects.filter((quizIsCorrect) => quizIsCorrect === true)
-      .length;
-  },
-});
+export const useQuizIsCorrectStore = create<State & Action>()(
+  immer(
+    persist(
+      (set) => ({
+        quizIsCorrects: [],
+        setQuizIsCorrects: (quizIsCorrect) =>
+          set((state) => {
+            state.quizIsCorrects = quizIsCorrect;
+            return state;
+          }),
+      }),
+      {
+        name: "quizIsCorrect-storage",
+      }
+    )
+  )
+);

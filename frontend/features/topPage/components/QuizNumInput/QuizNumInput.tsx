@@ -1,11 +1,13 @@
 import NumSelector from "@/components/NumSelector/NumSelector";
 import { MAX_QUIZ_NUM } from "@/const/commonConstant";
-import { quizNumState } from "@/stores/quizNumState";
+import { useQuizNumStore } from "@/stores/quizNumState";
 import { ChangeEvent } from "react";
-import { useRecoilState } from "recoil";
+import { useShallow } from "zustand/shallow";
 
 const QuizNumInput = () => {
-  const [quizNum, setQuizNum] = useRecoilState(quizNumState);
+  const [quizNum, setQuizNum] = useQuizNumStore(
+    useShallow((state) => [state.quizNum, state.setQuizNum])
+  );
   const numChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newQuizNum = parseInt(e.target.value);
     setQuizNum(newQuizNum);
