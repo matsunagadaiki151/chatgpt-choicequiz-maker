@@ -1,7 +1,12 @@
 import QuizPage from "@/features/quiz/components/QuizPage/QuizPage";
-import { TQuizPageParam } from "@/types/pageParam";
 
-export default async function Page({ params }: TQuizPageParam) {
+type PageProps = {
+  params: {
+    id: number;
+  };
+};
+
+export default async function Page({ params }: PageProps) {
   const { id } = params;
 
   return <QuizPage id={id} />;
