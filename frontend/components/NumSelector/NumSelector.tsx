@@ -1,4 +1,3 @@
-import { quizNumState } from "@/stores/quizNumState";
 import { ChangeEvent } from "react";
 
 export type TQuizNumInput = {
